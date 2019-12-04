@@ -10,5 +10,7 @@ Motor\Motor.cpp
 
 PIDController\PIDController.cpp
 
+src\ASF\common\boards\user_board\init.c
+
 WheelSpeed\WheelSpeed.cpp
 
