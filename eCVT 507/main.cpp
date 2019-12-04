@@ -10,11 +10,11 @@
 #include <avr/io.h>
 #include <avr/interrupt.h>
 
-#include "Timer.h"
+#include "Time/Time.h"
 
 #include "PIDController/PIDController.h"
 #include "Motor/Motor.h"
-// #include "Encoder.h"
+#include "Encoder/Encoder.h"
 #include "EngineSpeed/EngineSpeed.h"
 #include "WheelSpeed/WheelSpeed.h"
 
@@ -24,15 +24,9 @@
 
 /* ** WIRING ** */
 
-PORTA.DIR = 0;
-PORTB.DIR = 0;
-PORTC.DIR = 0;
-PORTD.DIR = 0;
-PORTE.DIR = 0;
-
 // Hall Effect Sensors
-const Pin ENGINE_SPEED_PIN  = {PORTE, PIN0_bm};
-const Pin RWHEELS_SPEED_PIN = {PORTE, PIN1_bm};
+Pin ENGINE_SPEED_PIN  = {PORTE, PIN0_bm};
+Pin RWHEELS_SPEED_PIN = {PORTE, PIN1_bm};
 
 // Primary
 const Pin P_MOT_INA = {PORTA, PIN0_bm};
@@ -63,8 +57,8 @@ PIDController pPID(0.01, 0, 0);
 PIDController sPID(0.01, 0, 0);
 
 // Hall Effect Sensors
-WheelSpeed engineSpeed(8);
-WheelSpeed rWheelsSpeed(50);
+EngineSpeed engineSpeed(8);
+WheelSpeed rWheelsSpeed(8);
 
 // Motors
 Motor pMot(P_MOT_INA, P_MOT_INB, P_MOT_PWM);
@@ -75,15 +69,17 @@ Encoder pEnc(P_ENC_A, P_ENC_B);
 Encoder sEnc(S_ENC_A, S_ENC_B);
 
 // Calibration
-const uint16_t CALIBRATION_DELAY = 1000;	// Milliseconds (ms)
-uint32_t pCalTime, sCalTime;				// Milliseconds (ms)
+// const uint16_t CALIBRATION_DELAY = 1000;	// Milliseconds (ms)
+// uint32_t pCalTime, sCalTime;				// Milliseconds (ms)
+const uint32_t CALIBRATION_DELAY = 1000000;	// Microseconds (us)
+uint32_t pCalTime, sCalTime;				// Microseconds (us)
 
 
 
 /* ** FINITE STATE MACHINE ** */
 
 // Timer
-Timer timer;
+Time time;
 
 // Inter-Communication Variables
 bool run;
@@ -92,40 +88,6 @@ uint16_t pTicks, sTicks;
 
 // States
 uint8_t eState, pState, sState;
-
-
-
-/* ** MAIN ** */
-int void main(void) {
-
-	//// Serial Monitor
-	//#ifdef DEBUG
-	//Serial.begin(9600);
-	//#endif
-
-	// Timer Interrupt
-	timer.begin(controllerISR, CONTROLLER_PERIOD);
-
-	// Initialize Task States
-	eState = 0;
-	pState = 0;
-	sState = 0;
-
-	while (true) {
-		// static uint32_t nextRunTime = micros();
-		// if (micros() > nextRunTime) {
-		// 	eCVT();
-		// 	primary();
-		// 	secondary();
-		// 	nextRunTime += 1000000;
-		// }
-		eCVT();
-		//primary();
-		//secondary();
-		//Serial.println(engineSpeed.get());
-	}
-
-}
 
 
 
@@ -143,7 +105,12 @@ void eCVT() {
 		// INITIALIZE
 		case 0:
 			// Engine Speed Setup
-			attachInterrupt(digitalPinToInterrupt(ENGINE_SPEED_PIN), engineSpeedISR, RISING);
+			ENGINE_SPEED_PIN.PORT.INTCTRL = (ENGINE_SPEED_PIN.PORT.INTCTRL & ~PORT_INT0LVL_gm) | PORT_INT0LVL_MED_gc;
+			ENGINE_SPEED_PIN.PORT.INT0MASK = ENGINE_SPEED_PIN.PIN_BM;
+
+			// Rear Wheel Speed Setup
+			RWHEELS_SPEED_PIN.PORT.INTCTRL = (RWHEELS_SPEED_PIN.PORT.INTCTRL & ~PORT_INT1LVL_gm) | PORT_INT0LVL_MED_gc;
+			RWHEELS_SPEED_PIN.PORT.INT1MASK = RWHEELS_SPEED_PIN.PIN_BM;
 
 			// PID Controller Setup
 			ePID.setSetpoint(SHIFT_SPEED);
@@ -226,15 +193,15 @@ void primary() {
 		// CALIBRATE - OPEN SHEAVES
 		case 1:
 			pMot.setDutyCycle(-5);
-			pCalTime = millis();
+			pCalTime = time.micros();
 			// State Changes
 			pState = 2;
 			return;
 
 		// CALIBRATE - ZERO ENCODER
 		case 2:
-			if (millis() - pCalTime > CALIBRATION_DELAY) {
-				pEnc.write(0);
+			if (time.micros() - pCalTime > CALIBRATION_DELAY) {
+				pEnc.zero();
 
 				// State Changes
 				pState = 3;
@@ -254,11 +221,11 @@ void primary() {
 			pPID.calc(pEnc.read());
 			pMot.setDutyCycle(pPID.get());
 
-			// Debugging
-			#ifdef DEBUG
-			Serial.print("pPID: ");
-			Serial.println(pPID.get());
-			#endif
+			// // Debugging
+			// #ifdef DEBUG
+			// Serial.print("pPID: ");
+			// Serial.println(pPID.get());
+			// #endif
 
 			// State Changes
 			pCalc = false;
@@ -294,15 +261,15 @@ void secondary() {
 		// CALIBRATE - OPEN SHEAVES
 		case 1:
 			sMot.setDutyCycle(-5);
-			sCalTime = millis();
+			sCalTime = time.micros();
 			// State Changes
 			sState = 2;
 			return;
 
 		// CALIBRATE - ZERO ENCODER
 		case 2:
-			if (millis() - sCalTime > CALIBRATION_DELAY) {
-				sEnc.write(0);
+			if (time.micros() - sCalTime > CALIBRATION_DELAY) {
+				sEnc.zero();
 
 				// State Changes
 				sState = 3;
@@ -339,9 +306,9 @@ void secondary() {
 /* **INTERRUPT SERVICE ROUTINES** */
 
 ISR(PORTE_INT0_vect) { engineSpeed.calc(); }
-ISR(PORTE_INT0_vect) { rWheelsSpeed.calc(); }
-
-void controllerISR() {
+ISR(PORTE_INT1_vect) { rWheelsSpeed.calc(); }
+	
+ISR(TCE0_CCA_vect) {
 	eCalc = true;
 	pCalc = true;
 	sCalc = true;
@@ -363,4 +330,49 @@ uint16_t sRatioToTicks(float ratio) {
 	static const uint16_t sLookup[] = {0,386,756,1111,1452,1780,2096,2399,2690,2970,3240,3500,3751,3992,4225,4449,4665,4874,5076,5271,5459,5641,5818,5988,6153,6313,6467,6617,6763,6904,7040,7173,7302,7427,7548,7666,7781,7893,8001,8107,8210,8310,8407,8502,8594,8685,8773,8858,8942,9023,9103,9181,9257,9331,9403,9474,9543,9611,9677,9742,9805,9867,9928,9987,10045,10102,10157,10212,10266,10318,10369,10420,10469,10517,10565,10612,10657,10702,10746,10789,10832,10874,10915,10955,10994,11033,11071,11109,11146,11182,11218,11253,11287,11321,11354,11387,11419,11451,11483,11513,11544};
 	if (ratio < 0) { return sLookup[0]; } else if (ratio > 100) { return sLookup[100]; }
 	return sLookup[(uint8_t)ratio];
+}
+
+
+
+/* ** MAIN ** */
+int main(void) {
+
+	//// Serial Monitor
+	//#ifdef DEBUG
+	//Serial.begin(9600);
+	//#endif
+
+	// Timer Interrupt
+	/* Initialize count, period and compare register of the timer/counter. */
+	TCE0.CNT = 0x0000;
+	TCE0.PER = 0xffff;
+	TCE0.CCA = 0x5555;
+	/* Set up timer/counter in normal mode with two compare channels. */
+	TCE0.CTRLB |= TC_WGMODE_NORMAL_gc;
+	TCE0.CTRLE = TC_CCAMODE_COMP_gc | TC_CCBMODE_COMP_gc;
+	/* Set levels for overflow and compare channel interrupts. */
+	TCE0.INTCTRLA = TC_OVFINTLVL_HI_gc;
+	TCE0.INTCTRLB = TC_CCAINTLVL_LO_gc | TC_CCBINTLVL_MED_gc;
+	/* Start the timer/counter and enable interrupts. */
+	TCE0.CTRLA = TC_CLKSEL_DIV64_gc;
+
+	// Initialize Task States
+	eState = 0;
+	pState = 0;
+	sState = 0;
+
+	while (true) {
+		// static uint32_t nextRunTime = time.micros();
+		// if (time.micros() > nextRunTime) {
+		// 	eCVT();
+		// 	primary();
+		// 	secondary();
+		// 	nextRunTime += 1000000;
+		// }
+		eCVT();
+		primary();
+		secondary();
+		//Serial.println(engineSpeed.get());
+	}
+
 }

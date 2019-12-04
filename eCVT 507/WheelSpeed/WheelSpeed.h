@@ -7,7 +7,6 @@
 #ifndef WheelSpeed_h
 #define WheelSpeed_h
 
-// #include <Arduino.h>
 #include <stdint.h>
 
 class WheelSpeed {

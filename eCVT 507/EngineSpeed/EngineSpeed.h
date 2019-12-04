@@ -7,7 +7,6 @@
 #ifndef EngineSpeed_h
 #define EngineSpeed_h
 
-// #include <Arduino.h>
 #include <stdint.h>
 
 class EngineSpeed {

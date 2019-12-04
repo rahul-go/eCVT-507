@@ -4,7 +4,6 @@
  *	Released to Cal Poly Baja SAE. ;)
  */
 
-// #include <Arduino.h>
 #include "PIDController.h"
 #include <stdint.h>
 

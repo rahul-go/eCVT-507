@@ -36,6 +36,7 @@ SUBDIRS :=  \
 ../EngineSpeed/ \
 ../Motor/ \
 ../PIDController/ \
+../Time \
 ../WheelSpeed/
 
 
@@ -45,6 +46,7 @@ C_SRCS +=  \
 ../main.cpp \
 ../Motor/Motor.cpp \
 ../PIDController/PIDController.cpp \
+../Time/Time.cpp \
 ../WheelSpeed/WheelSpeed.cpp
 
 
@@ -59,6 +61,7 @@ EngineSpeed/EngineSpeed.o \
 main.o \
 Motor/Motor.o \
 PIDController/PIDController.o \
+Time/Time.o \
 WheelSpeed/WheelSpeed.o
 
 OBJS_AS_ARGS +=  \
@@ -66,6 +69,7 @@ EngineSpeed/EngineSpeed.o \
 main.o \
 Motor/Motor.o \
 PIDController/PIDController.o \
+Time/Time.o \
 WheelSpeed/WheelSpeed.o
 
 C_DEPS +=  \
@@ -73,6 +77,7 @@ EngineSpeed/EngineSpeed.d \
 main.d \
 Motor/Motor.d \
 PIDController/PIDController.d \
+Time/Time.d \
 WheelSpeed/WheelSpeed.d
 
 C_DEPS_AS_ARGS +=  \
@@ -80,6 +85,7 @@ EngineSpeed/EngineSpeed.d \
 main.d \
 Motor/Motor.d \
 PIDController/PIDController.d \
+Time/Time.d \
 WheelSpeed/WheelSpeed.d
 
 OUTPUT_FILE_PATH +=eCVT\ 507.elf
@@ -118,6 +124,13 @@ Motor/Motor.o: ../Motor/Motor.cpp
 	
 
 PIDController/PIDController.o: ../PIDController/PIDController.cpp
+	@echo Building file: $<
+	@echo Invoking: AVR8/GNU C Compiler : 5.4.0
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-g++.exe$(QUOTE) -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAA_DFP\1.1.68\include"  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atxmega128a4u -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAA_DFP\1.1.68\gcc\dev\atxmega128a4u" -c -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+Time/Time.o: ../Time/Time.cpp
 	@echo Building file: $<
 	@echo Invoking: AVR8/GNU C Compiler : 5.4.0
 	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-g++.exe$(QUOTE) -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAA_DFP\1.1.68\include"  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atxmega128a4u -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAA_DFP\1.1.68\gcc\dev\atxmega128a4u" -c -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 

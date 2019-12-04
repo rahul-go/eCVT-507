@@ -10,5 +10,7 @@ Motor\Motor.cpp
 
 PIDController\PIDController.cpp
 
+Time\Time.cpp
+
 WheelSpeed\WheelSpeed.cpp
 

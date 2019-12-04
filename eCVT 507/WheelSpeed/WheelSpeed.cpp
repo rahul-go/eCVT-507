@@ -4,27 +4,28 @@
  *	Released to Cal Poly Baja SAE. ;)
  */
 
-// #include <Arduino.h>
 #include "WheelSpeed.h"
 #include <stdint.h>
+#include "../Time/Time.h"
 
+Time time;
 const uint32_t TIMEOUT = 1000000;
 
 // Constructor
 WheelSpeed::WheelSpeed(uint8_t triggers) {
 	// Initialize variables
 	this->triggers = triggers;
-	prevTime = micros();
-	currTime = micros();
+	prevTime = time.micros();
+	currTime = time.micros();
 }
 
 void WheelSpeed::calc() {
 	prevTime = currTime;
-	currTime = micros();
+	currTime = time.micros();
 }
 
 float WheelSpeed::get() {
-	if (micros() - prevTime >= TIMEOUT) {
+	if (time.micros() - prevTime >= TIMEOUT) {
 		return 0;
 	}
 	return (float)1000000 / ((currTime - prevTime) * triggers);		// Rotations per Second (RPS)

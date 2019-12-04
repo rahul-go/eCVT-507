@@ -1,5 +1,5 @@
 /*
- *	Motor.h - Library header for time.
+ *	Time.h - Library header for time.
  *	Created by Rahul Goyal, July 1 2019.
  *	Released to Cal Poly Baja SAE. ;)
  */

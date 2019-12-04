@@ -1,9 +1,11 @@
 /*
- *	Motor.cpp - Library for time.
+ *	Time.cpp - Library for time.
  *	Created by Rahul Goyal, July 1 2019.
  *	Released to Cal Poly Baja SAE. ;)
  */
 
+#include "Time.h"
+#include <avr/io.h>
 #include <stdint.h>
 
 // Constructor
@@ -22,5 +24,5 @@ Time::Time() {
 }
 
 uint32_t Time::micros() {
-	return = ((uint32_t)TCC1.CNT << 16) | TCC0.CNT;
+	return ((uint32_t)TCC1.CNT << 16) | TCC0.CNT;
 }

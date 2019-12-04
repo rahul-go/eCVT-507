@@ -7,7 +7,6 @@
 #ifndef PIDController_h
 #define PIDController_h
 
-// #include <Arduino.h>
 #include <stdint.h>
 
 class PIDController {
