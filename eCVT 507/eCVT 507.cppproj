@@ -190,6 +190,12 @@
     <Compile Include="PIDController\PIDController.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="Time\Time.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Time\Time.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="WheelSpeed\WheelSpeed.cpp">
       <SubType>compile</SubType>
     </Compile>
@@ -201,6 +207,7 @@
     <Folder Include="EngineSpeed\" />
     <Folder Include="Motor\" />
     <Folder Include="PIDController\" />
+    <Folder Include="Time" />
     <Folder Include="WheelSpeed\" />
   </ItemGroup>
   <ItemGroup>

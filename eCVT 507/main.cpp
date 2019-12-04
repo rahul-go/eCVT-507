@@ -10,6 +10,8 @@
 #include <avr/io.h>
 #include <avr/interrupt.h>
 
+#include "Timer.h"
+
 #include "PIDController/PIDController.h"
 #include "Motor/Motor.h"
 // #include "Encoder.h"
@@ -81,8 +83,7 @@ uint32_t pCalTime, sCalTime;				// Milliseconds (ms)
 /* ** FINITE STATE MACHINE ** */
 
 // Timer
-// IntervalTimer timer;
-// const uint32_t CONTROLLER_PERIOD = 1000;	// Microseconds (us)
+Timer timer;
 
 // Inter-Communication Variables
 bool run;
@@ -331,21 +332,20 @@ void secondary() {
 			sCalc = false;
 			sState = 3;
 	}
+} 
+
+
+
+/* **INTERRUPT SERVICE ROUTINES** */
+
+ISR(PORTE_INT0_vect) { engineSpeed.calc(); }
+ISR(PORTE_INT0_vect) { rWheelsSpeed.calc(); }
+
+void controllerISR() {
+	eCalc = true;
+	pCalc = true;
+	sCalc = true;
 }
-
-
-
-///* **INTERRUPT SERVICE ROUTINES** */
-//
-//void engineSpeedISR() { engineSpeed.calc(); }
-//void rWheelsSpeedISR() { rWheelsSpeed.calc(); }
-//void flWheelSpeedISR() { flWheelSpeed.calc(); }
-//void frWheelSpeedISR() { frWheelSpeed.calc(); }
-//void controllerISR() {
-	//eCalc = true;
-	//pCalc = true;
-	//sCalc = true;
-//}
 
 
 
