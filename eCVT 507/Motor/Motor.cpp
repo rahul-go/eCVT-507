@@ -5,20 +5,24 @@
  */
 
 // #include <Arduino.h>
-#include "Motor.h"
 #include <stdint.h>
+#include "Motor.h"
+#include "../Pin.h"
 
 // Constructor
-Motor::Motor(uint8_t INA, uint8_t INB, uint8_t PWM) {
+Motor::Motor(Pin INA, Pin INB, Pin PWM) {
 	this->INA = INA;
 	this->INB = INB;
 	this->PWM = PWM;
 }
 
 void Motor::init() {
-	pinMode(INA, OUTPUT);
-	pinMode(INB, OUTPUT);
-	pinMode(PWM, OUTPUT);
+	// pinMode(INA, OUTPUT);
+	// pinMode(INB, OUTPUT);
+	// pinMode(PWM, OUTPUT);
+	INA.PORT.DIR |= INA.PIN_BM;
+	INB.PORT.DIR |= INB.PIN_BM;
+	PWM.PORT.DIR |= PWM.PIN_BM;
 }
 
 void Motor::setDutyCycle(int8_t dutyCycle) {
@@ -40,15 +44,21 @@ void Motor::setDutyCycle(int8_t dutyCycle) {
 
 	// Coast (indpendent of direction)
 	if (dutyCycle == 0) {
-		digitalWrite(INA, LOW);
-		digitalWrite(INB, LOW);
+		// digitalWrite(INA, LOW);
+		// digitalWrite(INB, LOW);
+		INA.PORT.OUTCLR = INA.PIN_BM;
+		INB.PORT.OUTCLR = INB.PIN_BM;
 	// Negative
 	} else if (negative) {
-		digitalWrite(INA, LOW);
-		digitalWrite(INB, HIGH);
+		// digitalWrite(INA, LOW);
+		// digitalWrite(INB, HIGH);
+		INA.PORT.OUTCLR = INA.PIN_BM;
+		INB.PORT.OUTSET = INB.PIN_BM;
 	// Positive
 	} else {
-		digitalWrite(INA, HIGH);
-		digitalWrite(INB, LOW);
+		// digitalWrite(INA, HIGH);
+		// digitalWrite(INB, LOW);
+		INA.PORT.OUTSET = INA.PIN_BM;
+		INB.PORT.OUTCLR = INB.PIN_BM;
 	}
 }

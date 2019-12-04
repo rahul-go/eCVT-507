@@ -8,37 +8,43 @@
 
 //#include <Arduino.h>
 #include <avr/io.h>
-#include <avr/interrupt.h
+#include <avr/interrupt.h>
 
 #include "PIDController/PIDController.h"
 #include "Motor/Motor.h"
-#include <Encoder.h>
+// #include "Encoder.h"
 #include "EngineSpeed/EngineSpeed.h"
 #include "WheelSpeed/WheelSpeed.h"
+
+#include "Pin.h"
 
 
 
 /* ** WIRING ** */
 
+PORTA.DIR = 0;
+PORTB.DIR = 0;
+PORTC.DIR = 0;
+PORTD.DIR = 0;
+PORTE.DIR = 0;
+
 // Hall Effect Sensors
-const uint8_t ENGINE_SPEED_PIN  = PE0;
-const uint8_t RWHEELS_SPEED_PIN = PE1;
-//const uint8_t FLWHEEL_SPEED_PIN = 00;
-//const uint8_t FRWHEEL_SPEED_PIN = 00;
+const Pin ENGINE_SPEED_PIN  = {PORTE, PIN0_bm};
+const Pin RWHEELS_SPEED_PIN = {PORTE, PIN1_bm};
 
 // Primary
-const uint8_t P_MOT_INA = PA0;
-const uint8_t P_MOT_INB = PA1;
-const uint8_t P_MOT_PWM = PE2;
-const uint8_t P_ENC_A = PA4;
-const uint8_t P_ENC_B = PA5;
+const Pin P_MOT_INA = {PORTA, PIN0_bm};
+const Pin P_MOT_INB = {PORTA, PIN1_bm};
+const Pin P_MOT_PWM = {PORTE, PIN2_bm};
+const Pin P_ENC_A = {PORTA, PIN4_bm};
+const Pin P_ENC_B = {PORTA, PIN5_bm};
 
 // Secondary
-const uint8_t S_MOT_INA = PA2;
-const uint8_t S_MOT_INB = PA3;
-const uint8_t S_MOT_PWM = PE3;
-const uint8_t S_ENC_A = PA6;
-const uint8_t S_ENC_B = PA7;
+const Pin S_MOT_INA = {PORTA, PIN2_bm};
+const Pin S_MOT_INB = {PORTA, PIN3_bm};
+const Pin S_MOT_PWM = {PORTE, PIN3_bm};
+const Pin S_ENC_A = {PORTA, PIN6_bm};
+const Pin S_ENC_B = {PORTA, PIN7_bm};
 
 
 
@@ -46,7 +52,6 @@ const uint8_t S_ENC_B = PA7;
 
 const uint16_t ENGAGE_SPEED = 2800;
 const uint16_t SHIFT_SPEED  = 3400;
-// TODO disengagement speed
 
 const uint16_t SHEAVE_OFFSET = 0;
 
@@ -58,8 +63,6 @@ PIDController sPID(0.01, 0, 0);
 // Hall Effect Sensors
 WheelSpeed engineSpeed(8);
 WheelSpeed rWheelsSpeed(50);
-WheelSpeed flWheelSpeed(50);
-WheelSpeed frWheelSpeed(50);
 
 // Motors
 Motor pMot(P_MOT_INA, P_MOT_INB, P_MOT_PWM);
@@ -78,8 +81,8 @@ uint32_t pCalTime, sCalTime;				// Milliseconds (ms)
 /* ** FINITE STATE MACHINE ** */
 
 // Timer
-IntervalTimer timer;
-const uint32_t CONTROLLER_PERIOD = 1000;	// Microseconds (us)
+// IntervalTimer timer;
+// const uint32_t CONTROLLER_PERIOD = 1000;	// Microseconds (us)
 
 // Inter-Communication Variables
 bool run;
@@ -92,8 +95,8 @@ uint8_t eState, pState, sState;
 
 
 /* ** MAIN ** */
+int void main(void) {
 
-void setup() {
 	//// Serial Monitor
 	//#ifdef DEBUG
 	//Serial.begin(9600);
@@ -106,20 +109,21 @@ void setup() {
 	eState = 0;
 	pState = 0;
 	sState = 0;
-}
 
-void loop() {
-	// static uint32_t nextRunTime = micros();
-	// if (micros() > nextRunTime) {
-	// 	eCVT();
-	// 	primary();
-	// 	secondary();
-	// 	nextRunTime += 1000000;
-	// }
-	eCVT();
-	//primary();
-	//secondary();
-	//Serial.println(engineSpeed.get());
+	while (true) {
+		// static uint32_t nextRunTime = micros();
+		// if (micros() > nextRunTime) {
+		// 	eCVT();
+		// 	primary();
+		// 	secondary();
+		// 	nextRunTime += 1000000;
+		// }
+		eCVT();
+		//primary();
+		//secondary();
+		//Serial.println(engineSpeed.get());
+	}
+
 }
 
 
@@ -196,139 +200,141 @@ void eCVT() {
 
 
 
-//void primary() {
-	// Debugging
-	//#ifdef DEBUG
-	//Serial.print("pState: ");
-	//Serial.println(pState);
-	//#endif
-	//
-	//switch (pState) {
-		//// INITIALIZE
-		//case 0:
-			//// Setup Motor
-			//pMot.init();
-//
-			//// Setup PID Controller
-			//pPID.setLoSat(-100);
-			//pPID.setHiSat( 100);
-			//pMot.setDutyCycle(0);
-//
-			//// State Changes
-			//pState = 1;
-			//return;
-//
-		//// CALIBRATE - OPEN SHEAVES
-		//case 1:
-			//pMot.setDutyCycle(-5);
-			//pCalTime = millis();
-			//// State Changes
-			//pState = 2;
-			//return;
-//
-		//// CALIBRATE - ZERO ENCODER
-		//case 2:
-			//if (millis() - pCalTime > CALIBRATION_DELAY) {
-				//pEnc.write(0);
-//
-				//// State Changes
-				//pState = 3;
-			//}
-			//return;
-//
-		//// P-ONLY CONTROLLER - REST
-		//case 3:
-			//// State Changes
-			//if (pCalc) {
-				//pState = 4;
-			//}
-//
-		//// P-ONLY CONTROLLER - UPDATE
-		//case 4:
-			//pPID.setSetpoint(pTicks);
-			//pPID.calc(pEnc.read());
-			//pMot.setDutyCycle(pPID.get());
-//
-			//// Debugging
-			//#ifdef DEBUG
-			//Serial.print("pPID: ");
-			//Serial.println(pPID.get());
-			//#endif
-//
-			//// State Changes
-			//pCalc = false;
-			//pState = 3;
-	//}
-//}
-//
-//void secondary() {
-	// Debugging
-	//#ifdef DEBUG
-	//Serial.print("sState: ");
-	//Serial.println(sState);
-	//Serial.println(sEnc.read());
-	//#endif
-	//
-	//switch (sState) {
-		//// INITIALIZE
-		//case 0:
-			//// Setup Motor
-			//sMot.init();
-//
-			//// Setup PID Controller
-			//sPID.setLoSat(-100);
-			//sPID.setHiSat( 100);
-			//sMot.setDutyCycle(0);
-//
-			//// State Changes
-			//sState = 1;
-			//return;
-//
-		//// CALIBRATE - OPEN SHEAVES
-		//case 1:
-			//sMot.setDutyCycle(-5);
-			//sCalTime = millis();
-			//// State Changes
-			//sState = 2;
-			//return;
-//
-		//// CALIBRATE - ZERO ENCODER
-		//case 2:
-			//if (millis() - sCalTime > CALIBRATION_DELAY) {
-				//sEnc.write(0);
-//
-				//// State Changes
-				//sState = 3;
-			//}
-			//return;
-//
-		//// P-ONLY CONTROLLER - REST
-		//case 3:
-			//// State Changes
-			//if (sCalc) {
-				//sState = 4;
-			//}
-//
-		//// P-ONLY CONTROLLER - UPDATE
-		//case 4:
-			//sPID.setSetpoint(sTicks);
-			//sPID.calc(sEnc.read());
-			//sMot.setDutyCycle(sPID.get());
-//
-			//// Debugging
-			//#ifdef DEBUG
-			//Serial.print("sPID: ");
-			//Serial.println(sPID.get());
-			//#endif
-//
-			//// State Changes
-			//sCalc = false;
-			//sState = 3;
-	//}
-//}
-//
-//
-//
+void primary() {
+	// // Debugging
+	// #ifdef DEBUG
+	// Serial.print("pState: ");
+	// Serial.println(pState);
+	// #endif
+	
+	switch (pState) {
+		// INITIALIZE
+		case 0:
+			// Setup Motor
+			pMot.init();
+
+			// Setup PID Controller
+			pPID.setLoSat(-100);
+			pPID.setHiSat( 100);
+			pMot.setDutyCycle(0);
+
+			// State Changes
+			pState = 1;
+			return;
+
+		// CALIBRATE - OPEN SHEAVES
+		case 1:
+			pMot.setDutyCycle(-5);
+			pCalTime = millis();
+			// State Changes
+			pState = 2;
+			return;
+
+		// CALIBRATE - ZERO ENCODER
+		case 2:
+			if (millis() - pCalTime > CALIBRATION_DELAY) {
+				pEnc.write(0);
+
+				// State Changes
+				pState = 3;
+			}
+			return;
+
+		// P-ONLY CONTROLLER - REST
+		case 3:
+			// State Changes
+			if (pCalc) {
+				pState = 4;
+			}
+
+		// P-ONLY CONTROLLER - UPDATE
+		case 4:
+			pPID.setSetpoint(pTicks);
+			pPID.calc(pEnc.read());
+			pMot.setDutyCycle(pPID.get());
+
+			// Debugging
+			#ifdef DEBUG
+			Serial.print("pPID: ");
+			Serial.println(pPID.get());
+			#endif
+
+			// State Changes
+			pCalc = false;
+			pState = 3;
+	}
+}
+
+
+
+void secondary() {
+	// // Debugging
+	// #ifdef DEBUG
+	// Serial.print("sState: ");
+	// Serial.println(sState);
+	// Serial.println(sEnc.read());
+	// #endif
+	
+	switch (sState) {
+		// INITIALIZE
+		case 0:
+			// Setup Motor
+			sMot.init();
+
+			// Setup PID Controller
+			sPID.setLoSat(-100);
+			sPID.setHiSat( 100);
+			sMot.setDutyCycle(0);
+
+			// State Changes
+			sState = 1;
+			return;
+
+		// CALIBRATE - OPEN SHEAVES
+		case 1:
+			sMot.setDutyCycle(-5);
+			sCalTime = millis();
+			// State Changes
+			sState = 2;
+			return;
+
+		// CALIBRATE - ZERO ENCODER
+		case 2:
+			if (millis() - sCalTime > CALIBRATION_DELAY) {
+				sEnc.write(0);
+
+				// State Changes
+				sState = 3;
+			}
+			return;
+
+		// P-ONLY CONTROLLER - REST
+		case 3:
+			// State Changes
+			if (sCalc) {
+				sState = 4;
+			}
+
+		// P-ONLY CONTROLLER - UPDATE
+		case 4:
+			sPID.setSetpoint(sTicks);
+			sPID.calc(sEnc.read());
+			sMot.setDutyCycle(sPID.get());
+
+			// // Debugging
+			// #ifdef DEBUG
+			// Serial.print("sPID: ");
+			// Serial.println(sPID.get());
+			// #endif
+
+			// State Changes
+			sCalc = false;
+			sState = 3;
+	}
+}
+
+
+
 ///* **INTERRUPT SERVICE ROUTINES** */
 //
 //void engineSpeedISR() { engineSpeed.calc(); }
