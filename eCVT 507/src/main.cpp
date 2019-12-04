@@ -10,6 +10,8 @@
 #include <avr/io.h>
 #include <avr/interrupt.h>
 
+#include <asf.h>
+
 #include "PIDController/PIDController.h"
 #include "Motor/Motor.h"
 // #include "Encoder.h"
@@ -96,6 +98,11 @@ uint8_t eState, pState, sState;
 
 /* ** MAIN ** */
 int void main(void) {
+	
+	sysclk_init();
+	board_init();
+
+
 
 	//// Serial Monitor
 	//#ifdef DEBUG
