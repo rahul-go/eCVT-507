@@ -37,22 +37,24 @@ void TC_Init(){
 
 	// Encoder Initialization
 	/* Configure TC as a quadrature counter. */
-	TCD0.CTRLD = (uint8_t) TC_EVACT_QDEC_gc | EVSYS.CH2MUX;
-	TCD0.PER = (3584 * 4) - 1;
-	TCD0.CTRLA = TC_CLKSEL_DIV1_gc;	 
+	TCD0_CTRLD = (uint8_t) TC_EVACT_QDEC_gc | EVSYS.CH2MUX;
+	// TCD0.PER = (3584 * 4) - 1;
+	TCD0_CTRLA = TC_CLKSEL_DIV1_gc;	 
 	/* Configure TC as a quadrature counter. */
-	TCD1.CTRLD = (uint8_t) TC_EVACT_QDEC_gc | EVSYS.CH3MUX;
-	TCD1.PER = (3584 * 4) - 1;
-	TCD1.CTRLA = TC_CLKSEL_DIV1_gc;	 
+	TCD1_CTRLD = (uint8_t) TC_EVACT_QDEC_gc | EVSYS.CH3MUX;
+	// TCD1.PER = (3584 * 4) - 1;
+	TCD1_CTRLA = TC_CLKSEL_DIV1_gc;
 
 	// PWM Output Initialization
+	/* Set the TC period. */
+	//TCE0_PER = OxFFFF;
 	/* Configure the TC for single slope mode. */
-	TCE0.CTRLB |= TC_WGMODE_SINGLESLOPE_gc;
-	/* Enable Compare channel A and B. */
-	TCE0.CTRLB |= TC0_CCAEN_bm;
-	TCE0.CTRLB |= TC0_CCBEN_bm;
+	TCE0_CTRLB |= TC_WGMODE_SINGLESLOPE_gc;
+	/* Enable Compare channel C and D. */
+	TCE0_CTRLB |= TC0_CCCEN_bm;
+	TCE0_CTRLB |= TC0_CCDEN_bm;
 	/* Start timer by selecting a clock source. */
-	TCE0.CTRLA = (TCE0.CTRLA & ~TC0_CLKSEL_gm) | TC_CLKSEL_DIV1_gc;
+	TCE0_CTRLA = (TCE0_CTRLA & ~TC0_CLKSEL_gm) | TC_CLKSEL_DIV1_gc;
 }
 
 uint32_t micros() {
@@ -60,13 +62,13 @@ uint32_t micros() {
 }
 
 void analogWrite(Pin pin, uint8_t dutyCycle) {
-	// Primary Encoder
+	// Primary Motor
 	if (pin.PIN_BM == P_MOT_PWM.PIN_BM) {
-		TCE0.CCA = ((uint16_t)dutyCycle << 8);
+		TCE0_CCC = 65535;
 	}
-	// Secondary Encoder
+	// Secondary Motor
 	if (pin.PIN_BM == S_MOT_PWM.PIN_BM) {
-		TCE0.CCB = ((uint16_t)dutyCycle << 8);
+		TCE0_CCD = 0;
 	}
 }
 

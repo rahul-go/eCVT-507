@@ -30,8 +30,6 @@ const Pin S_MOT_PWM = {PORTE, PIN3_bm};
 const Pin S_ENC_A = {PORTA, PIN6_bm};
 const Pin S_ENC_B = {PORTA, PIN7_bm};
 
-
-
 void IO_Init();
 
 #endif

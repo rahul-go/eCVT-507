@@ -17,9 +17,8 @@ Motor::Motor(Pin INA, Pin INB, Pin PWM) {
 }
 
 void Motor::init() {
-	INA.PORT.DIR |= INA.PIN_BM;
-	INB.PORT.DIR |= INB.PIN_BM;
-	PWM.PORT.DIR |= PWM.PIN_BM;
+	INA.PORT.DIRSET = INA.PIN_BM | INB.PIN_BM;
+	PWM.PORT.DIRSET = PWM.PIN_BM;
 }
 
 void Motor::setDutyCycle(int8_t dutyCycle) {
