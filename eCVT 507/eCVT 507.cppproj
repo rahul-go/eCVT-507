@@ -169,60 +169,54 @@
     </ToolchainSettings>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="EngineSpeed\EngineSpeed.cpp">
+    <Compile Include="Encoder.cpp">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="EngineSpeed\EngineSpeed.h">
+    <Compile Include="Encoder.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="EngineSpeed.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="EngineSpeed.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="IO_Config.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="IO_Config.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="main.cpp">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Motor\Motor.cpp">
+    <Compile Include="Motor.cpp">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Motor\Motor.h">
+    <Compile Include="Motor.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="PIDController\PIDController.cpp">
+    <Compile Include="PIDController.cpp">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="PIDController\PIDController.h">
+    <Compile Include="PIDController.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Time\Time.cpp">
+    <Compile Include="Pin.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Time\Time.h">
+    <Compile Include="TC_Config.cpp">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="WheelSpeed\WheelSpeed.cpp">
+    <Compile Include="TC_Config.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="WheelSpeed\WheelSpeed.h">
+    <Compile Include="WheelSpeed.cpp">
       <SubType>compile</SubType>
     </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="EngineSpeed\" />
-    <Folder Include="Motor\" />
-    <Folder Include="PIDController\" />
-    <Folder Include="Time" />
-    <Folder Include="WheelSpeed\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="EngineSpeed\keywords.txt">
+    <Compile Include="WheelSpeed.h">
       <SubType>compile</SubType>
-    </None>
-    <None Include="Motor\keywords.txt">
-      <SubType>compile</SubType>
-    </None>
-    <None Include="PIDController\keywords.txt">
-      <SubType>compile</SubType>
-    </None>
-    <None Include="WheelSpeed\keywords.txt">
-      <SubType>compile</SubType>
-    </None>
+    </Compile>
   </ItemGroup>
   <Import Project="$(AVRSTUDIO_EXE_PATH)\\Vs\\Compiler.targets" />
 </Project>

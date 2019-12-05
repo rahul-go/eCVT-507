@@ -8,6 +8,7 @@
 #define Encoder_h
 
 #include <stdint.h>
+#include "Pin.h"
 
 class Encoder {
 
@@ -20,6 +21,8 @@ class Encoder {
 		void zero();
 
 	private:
+		Pin ENC_A;
+		Pin ENC_B;
 
 };
 

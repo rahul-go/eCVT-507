@@ -7,9 +7,8 @@
 #ifndef Motor_h
 #define Motor_h
 
-// #include <Arduino.h>
 #include <stdint.h>
-#include "../Pin.h"
+#include "Pin.h"
 
 class Motor {
 

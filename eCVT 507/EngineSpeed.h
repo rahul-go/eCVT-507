@@ -8,6 +8,7 @@
 #define EngineSpeed_h
 
 #include <stdint.h>
+#include "TC_Config.h"
 
 class EngineSpeed {
 

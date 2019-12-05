@@ -32,22 +32,19 @@ LIB_DEP:=
 LINKER_SCRIPT_DEP:=
 
 # Every subdirectory with source files must be described here
-SUBDIRS :=  \
-../EngineSpeed/ \
-../Motor/ \
-../PIDController/ \
-../Time \
-../WheelSpeed/
+SUBDIRS := 
 
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS +=  \
-../EngineSpeed/EngineSpeed.cpp \
+../Encoder.cpp \
+../EngineSpeed.cpp \
+../IO_Config.cpp \
 ../main.cpp \
-../Motor/Motor.cpp \
-../PIDController/PIDController.cpp \
-../Time/Time.cpp \
-../WheelSpeed/WheelSpeed.cpp
+../Motor.cpp \
+../PIDController.cpp \
+../TC_Config.cpp \
+../WheelSpeed.cpp
 
 
 PREPROCESSING_SRCS += 
@@ -57,36 +54,44 @@ ASM_SRCS +=
 
 
 OBJS +=  \
-EngineSpeed/EngineSpeed.o \
+Encoder.o \
+EngineSpeed.o \
+IO_Config.o \
 main.o \
-Motor/Motor.o \
-PIDController/PIDController.o \
-Time/Time.o \
-WheelSpeed/WheelSpeed.o
+Motor.o \
+PIDController.o \
+TC_Config.o \
+WheelSpeed.o
 
 OBJS_AS_ARGS +=  \
-EngineSpeed/EngineSpeed.o \
+Encoder.o \
+EngineSpeed.o \
+IO_Config.o \
 main.o \
-Motor/Motor.o \
-PIDController/PIDController.o \
-Time/Time.o \
-WheelSpeed/WheelSpeed.o
+Motor.o \
+PIDController.o \
+TC_Config.o \
+WheelSpeed.o
 
 C_DEPS +=  \
-EngineSpeed/EngineSpeed.d \
+Encoder.d \
+EngineSpeed.d \
+IO_Config.d \
 main.d \
-Motor/Motor.d \
-PIDController/PIDController.d \
-Time/Time.d \
-WheelSpeed/WheelSpeed.d
+Motor.d \
+PIDController.d \
+TC_Config.d \
+WheelSpeed.d
 
 C_DEPS_AS_ARGS +=  \
-EngineSpeed/EngineSpeed.d \
+Encoder.d \
+EngineSpeed.d \
+IO_Config.d \
 main.d \
-Motor/Motor.d \
-PIDController/PIDController.d \
-Time/Time.d \
-WheelSpeed/WheelSpeed.d
+Motor.d \
+PIDController.d \
+TC_Config.d \
+WheelSpeed.d
 
 OUTPUT_FILE_PATH +=eCVT\ 507.elf
 
@@ -102,7 +107,21 @@ LINKER_SCRIPT_DEP+=
 
 
 # AVR32/GNU C Compiler
-EngineSpeed/EngineSpeed.o: ../EngineSpeed/EngineSpeed.cpp
+./Encoder.o: .././Encoder.cpp
+	@echo Building file: $<
+	@echo Invoking: AVR8/GNU C Compiler : 5.4.0
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-g++.exe$(QUOTE) -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAA_DFP\1.1.68\include"  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atxmega128a4u -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAA_DFP\1.1.68\gcc\dev\atxmega128a4u" -c -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+./EngineSpeed.o: .././EngineSpeed.cpp
+	@echo Building file: $<
+	@echo Invoking: AVR8/GNU C Compiler : 5.4.0
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-g++.exe$(QUOTE) -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAA_DFP\1.1.68\include"  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atxmega128a4u -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAA_DFP\1.1.68\gcc\dev\atxmega128a4u" -c -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+./IO_Config.o: .././IO_Config.cpp
 	@echo Building file: $<
 	@echo Invoking: AVR8/GNU C Compiler : 5.4.0
 	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-g++.exe$(QUOTE) -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAA_DFP\1.1.68\include"  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atxmega128a4u -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAA_DFP\1.1.68\gcc\dev\atxmega128a4u" -c -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
@@ -116,28 +135,28 @@ EngineSpeed/EngineSpeed.o: ../EngineSpeed/EngineSpeed.cpp
 	@echo Finished building: $<
 	
 
-Motor/Motor.o: ../Motor/Motor.cpp
+./Motor.o: .././Motor.cpp
 	@echo Building file: $<
 	@echo Invoking: AVR8/GNU C Compiler : 5.4.0
 	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-g++.exe$(QUOTE) -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAA_DFP\1.1.68\include"  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atxmega128a4u -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAA_DFP\1.1.68\gcc\dev\atxmega128a4u" -c -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
 	@echo Finished building: $<
 	
 
-PIDController/PIDController.o: ../PIDController/PIDController.cpp
+./PIDController.o: .././PIDController.cpp
 	@echo Building file: $<
 	@echo Invoking: AVR8/GNU C Compiler : 5.4.0
 	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-g++.exe$(QUOTE) -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAA_DFP\1.1.68\include"  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atxmega128a4u -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAA_DFP\1.1.68\gcc\dev\atxmega128a4u" -c -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
 	@echo Finished building: $<
 	
 
-Time/Time.o: ../Time/Time.cpp
+./TC_Config.o: .././TC_Config.cpp
 	@echo Building file: $<
 	@echo Invoking: AVR8/GNU C Compiler : 5.4.0
 	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-g++.exe$(QUOTE) -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAA_DFP\1.1.68\include"  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atxmega128a4u -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAA_DFP\1.1.68\gcc\dev\atxmega128a4u" -c -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
 	@echo Finished building: $<
 	
 
-WheelSpeed/WheelSpeed.o: ../WheelSpeed/WheelSpeed.cpp
+./WheelSpeed.o: .././WheelSpeed.cpp
 	@echo Building file: $<
 	@echo Invoking: AVR8/GNU C Compiler : 5.4.0
 	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-g++.exe$(QUOTE) -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAA_DFP\1.1.68\include"  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atxmega128a4u -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAA_DFP\1.1.68\gcc\dev\atxmega128a4u" -c -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 

@@ -9,43 +9,21 @@
 //#include <Arduino.h>
 #include <avr/io.h>
 #include <avr/interrupt.h>
+#include <stdint.h>
 
-#include "Time/Time.h"
-
-#include "PIDController/PIDController.h"
-#include "Motor/Motor.h"
-#include "Encoder/Encoder.h"
-#include "EngineSpeed/EngineSpeed.h"
-#include "WheelSpeed/WheelSpeed.h"
-
+#include "IO_Config.h"
+#include "TC_Config.h"
 #include "Pin.h"
 
-
-
-/* ** WIRING ** */
-
-// Hall Effect Sensors
-Pin ENGINE_SPEED_PIN  = {PORTE, PIN0_bm};
-Pin RWHEELS_SPEED_PIN = {PORTE, PIN1_bm};
-
-// Primary
-const Pin P_MOT_INA = {PORTA, PIN0_bm};
-const Pin P_MOT_INB = {PORTA, PIN1_bm};
-const Pin P_MOT_PWM = {PORTE, PIN2_bm};
-const Pin P_ENC_A = {PORTA, PIN4_bm};
-const Pin P_ENC_B = {PORTA, PIN5_bm};
-
-// Secondary
-const Pin S_MOT_INA = {PORTA, PIN2_bm};
-const Pin S_MOT_INB = {PORTA, PIN3_bm};
-const Pin S_MOT_PWM = {PORTE, PIN3_bm};
-const Pin S_ENC_A = {PORTA, PIN6_bm};
-const Pin S_ENC_B = {PORTA, PIN7_bm};
+#include "PIDController.h"
+#include "Motor.h"
+#include "Encoder.h"
+#include "EngineSpeed.h"
+#include "WheelSpeed.h"
 
 
 
 /* ** SYSTEM ** */
-
 const uint16_t ENGAGE_SPEED = 2800;
 const uint16_t SHIFT_SPEED  = 3400;
 
@@ -79,15 +57,49 @@ uint32_t pCalTime, sCalTime;				// Microseconds (us)
 /* ** FINITE STATE MACHINE ** */
 
 // Timer
-Time time;
+const uint16_t CONTROLLER_SPEED = 10000;	// Microseconds (us)
 
 // Inter-Communication Variables
 bool run;
 bool eCalc, pCalc, sCalc;
 uint16_t pTicks, sTicks;
 
-// States
-uint8_t eState, pState, sState;
+// Initialize Task States
+uint8_t eState = 0;
+uint8_t pState = 0;
+uint8_t sState = 0;
+
+
+
+/* **LOOKUP TABLES** */
+
+uint16_t pRatioToTicks(float ratio) {
+	// 1% ratio increments
+	static const uint16_t pLookup[] = {15919,15563,15217,14878,14548,14226,13913,13607,13308,13017,12734,12457,12188,11925,11669,11419,11176,10938,10707,10481,10260,10045,9835,9631,9431,9236,9045,8859,8677,8500,8326,8157,7991,7829,7671,7516,7365,7217,7072,6930,6791,6655,6522,6392,6265,6140,6017,5897,5780,5665,5552,5441,5332,5226,5121,5019,4918,4820,4723,4628,4534,4443,4353,4264,4177,4092,4008,3925,3844,3765,3686,3609,3534,3459,3386,3314,3243,3173,3104,3037,2970,2905,2840,2777,2714,2653,2592,2532,2473,2415,2358,2302,2246,2191,2137,2084,2032,1980,1929,1879,1829};
+	if (ratio < 0) { return pLookup[0]; } else if (ratio > 100) { return pLookup[100]; }
+	return pLookup[(uint8_t)ratio];
+}
+
+uint16_t sRatioToTicks(float ratio) {
+	// 1% ratio increments
+	static const uint16_t sLookup[] = {0,386,756,1111,1452,1780,2096,2399,2690,2970,3240,3500,3751,3992,4225,4449,4665,4874,5076,5271,5459,5641,5818,5988,6153,6313,6467,6617,6763,6904,7040,7173,7302,7427,7548,7666,7781,7893,8001,8107,8210,8310,8407,8502,8594,8685,8773,8858,8942,9023,9103,9181,9257,9331,9403,9474,9543,9611,9677,9742,9805,9867,9928,9987,10045,10102,10157,10212,10266,10318,10369,10420,10469,10517,10565,10612,10657,10702,10746,10789,10832,10874,10915,10955,10994,11033,11071,11109,11146,11182,11218,11253,11287,11321,11354,11387,11419,11451,11483,11513,11544};
+	if (ratio < 0) { return sLookup[0]; } else if (ratio > 100) { return sLookup[100]; }
+	return sLookup[(uint8_t)ratio];
+}
+
+
+
+/* **INTERRUPT SERVICE ROUTINES** */
+
+ISR(PORTE_INT0_vect) { engineSpeed.calc(); }
+ISR(PORTE_INT1_vect) { rWheelsSpeed.calc(); }
+	
+ISR(TCE0_CCA_vect) {
+	eCalc = true;
+	pCalc = true;
+	sCalc = true;
+	TCC0.CCA += CONTROLLER_SPEED;
+}
 
 
 
@@ -104,13 +116,6 @@ void eCVT() {
 
 		// INITIALIZE
 		case 0:
-			// Engine Speed Setup
-			ENGINE_SPEED_PIN.PORT.INTCTRL = (ENGINE_SPEED_PIN.PORT.INTCTRL & ~PORT_INT0LVL_gm) | PORT_INT0LVL_MED_gc;
-			ENGINE_SPEED_PIN.PORT.INT0MASK = ENGINE_SPEED_PIN.PIN_BM;
-
-			// Rear Wheel Speed Setup
-			RWHEELS_SPEED_PIN.PORT.INTCTRL = (RWHEELS_SPEED_PIN.PORT.INTCTRL & ~PORT_INT1LVL_gm) | PORT_INT0LVL_MED_gc;
-			RWHEELS_SPEED_PIN.PORT.INT1MASK = RWHEELS_SPEED_PIN.PIN_BM;
 
 			// PID Controller Setup
 			ePID.setSetpoint(SHIFT_SPEED);
@@ -193,14 +198,14 @@ void primary() {
 		// CALIBRATE - OPEN SHEAVES
 		case 1:
 			pMot.setDutyCycle(-5);
-			pCalTime = time.micros();
+			pCalTime = micros();
 			// State Changes
 			pState = 2;
 			return;
 
 		// CALIBRATE - ZERO ENCODER
 		case 2:
-			if (time.micros() - pCalTime > CALIBRATION_DELAY) {
+			if (micros() - pCalTime > CALIBRATION_DELAY) {
 				pEnc.zero();
 
 				// State Changes
@@ -261,14 +266,14 @@ void secondary() {
 		// CALIBRATE - OPEN SHEAVES
 		case 1:
 			sMot.setDutyCycle(-5);
-			sCalTime = time.micros();
+			sCalTime = micros();
 			// State Changes
 			sState = 2;
 			return;
 
 		// CALIBRATE - ZERO ENCODER
 		case 2:
-			if (time.micros() - sCalTime > CALIBRATION_DELAY) {
+			if (micros() - sCalTime > CALIBRATION_DELAY) {
 				sEnc.zero();
 
 				// State Changes
@@ -299,37 +304,6 @@ void secondary() {
 			sCalc = false;
 			sState = 3;
 	}
-} 
-
-
-
-/* **INTERRUPT SERVICE ROUTINES** */
-
-ISR(PORTE_INT0_vect) { engineSpeed.calc(); }
-ISR(PORTE_INT1_vect) { rWheelsSpeed.calc(); }
-	
-ISR(TCE0_CCA_vect) {
-	eCalc = true;
-	pCalc = true;
-	sCalc = true;
-}
-
-
-
-/* **LOOKUP TABLES** */
-
-uint16_t pRatioToTicks(float ratio) {
-	// 1% ratio increments
-	static const uint16_t pLookup[] = {15919,15563,15217,14878,14548,14226,13913,13607,13308,13017,12734,12457,12188,11925,11669,11419,11176,10938,10707,10481,10260,10045,9835,9631,9431,9236,9045,8859,8677,8500,8326,8157,7991,7829,7671,7516,7365,7217,7072,6930,6791,6655,6522,6392,6265,6140,6017,5897,5780,5665,5552,5441,5332,5226,5121,5019,4918,4820,4723,4628,4534,4443,4353,4264,4177,4092,4008,3925,3844,3765,3686,3609,3534,3459,3386,3314,3243,3173,3104,3037,2970,2905,2840,2777,2714,2653,2592,2532,2473,2415,2358,2302,2246,2191,2137,2084,2032,1980,1929,1879,1829};
-	if (ratio < 0) { return pLookup[0]; } else if (ratio > 100) { return pLookup[100]; }
-	return pLookup[(uint8_t)ratio];
-}
-
-uint16_t sRatioToTicks(float ratio) {
-	// 1% ratio increments
-	static const uint16_t sLookup[] = {0,386,756,1111,1452,1780,2096,2399,2690,2970,3240,3500,3751,3992,4225,4449,4665,4874,5076,5271,5459,5641,5818,5988,6153,6313,6467,6617,6763,6904,7040,7173,7302,7427,7548,7666,7781,7893,8001,8107,8210,8310,8407,8502,8594,8685,8773,8858,8942,9023,9103,9181,9257,9331,9403,9474,9543,9611,9677,9742,9805,9867,9928,9987,10045,10102,10157,10212,10266,10318,10369,10420,10469,10517,10565,10612,10657,10702,10746,10789,10832,10874,10915,10955,10994,11033,11071,11109,11146,11182,11218,11253,11287,11321,11354,11387,11419,11451,11483,11513,11544};
-	if (ratio < 0) { return sLookup[0]; } else if (ratio > 100) { return sLookup[100]; }
-	return sLookup[(uint8_t)ratio];
 }
 
 
@@ -341,25 +315,11 @@ int main(void) {
 	//#ifdef DEBUG
 	//Serial.begin(9600);
 	//#endif
-
-	// Timer Interrupt
-	/* Initialize count, period and compare register of the timer/counter. */
-	TCE0.CNT = 0x0000;
-	TCE0.PER = 0xffff;
-	TCE0.CCA = 0x5555;
-	/* Set up timer/counter in normal mode with two compare channels. */
-	TCE0.CTRLB |= TC_WGMODE_NORMAL_gc;
-	TCE0.CTRLE = TC_CCAMODE_COMP_gc | TC_CCBMODE_COMP_gc;
-	/* Set levels for overflow and compare channel interrupts. */
-	TCE0.INTCTRLA = TC_OVFINTLVL_HI_gc;
-	TCE0.INTCTRLB = TC_CCAINTLVL_LO_gc | TC_CCBINTLVL_MED_gc;
-	/* Start the timer/counter and enable interrupts. */
-	TCE0.CTRLA = TC_CLKSEL_DIV64_gc;
-
-	// Initialize Task States
-	eState = 0;
-	pState = 0;
-	sState = 0;
+	
+	/* ** INPUT/OUTPUT CONFIGURATIONS ** */
+	IO_Init();
+	/* ** TIMER/COUNTER CONFIGURATIONS ** */
+	TC_Init();
 
 	while (true) {
 		// static uint32_t nextRunTime = time.micros();

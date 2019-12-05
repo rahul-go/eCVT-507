@@ -6,9 +6,8 @@
 
 #include "EngineSpeed.h"
 #include <stdint.h>
-#include "../Time/Time.h"
+#include "TC_Config.h"
 
-Time time;
 const uint32_t TIMEOUT = 1000000;
 
 // Constructor
@@ -16,14 +15,14 @@ EngineSpeed::EngineSpeed(uint8_t triggers) {
 	// Initialize variables
 	this->triggers = triggers;
 	for (uint8_t i = 0; i < triggers; i++) {
-		prevTime[i] = time.micros();
+		prevTime[i] = micros();
 	}
-	currTime = time.micros();
+	currTime = micros();
 }
 
 void EngineSpeed::calc() {
 	prevTime[pos] = currTime;
-	currTime = time.micros();
+	currTime = micros();
 	// Increment position
 	pos++;
 	if (pos >= triggers) {
@@ -32,7 +31,7 @@ void EngineSpeed::calc() {
 }
 
 uint16_t EngineSpeed::get() {
-	if (time.micros() - prevTime[pos] >= TIMEOUT) {
+	if (micros() - prevTime[pos] >= TIMEOUT) {
 		return 0;
 	}
 	// return 2000000 / (currTime - prevTime[pos]);	// Rotations per Second (RPS)
