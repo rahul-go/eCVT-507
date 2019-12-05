@@ -8,6 +8,7 @@
 #define Motor_h
 
 #include <stdint.h>
+#include "avr/io.h"
 #include "Pin.h"
 
 class Motor {

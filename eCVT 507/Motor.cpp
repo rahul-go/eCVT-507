@@ -4,9 +4,10 @@
  *	Released to Cal Poly Baja SAE. ;)
  */
 
+#include "Motor.h"
+#include "avr/io.h"
 #include <stdint.h>
 #include "TC_Config.h"
-#include "Motor.h"
 #include "Pin.h"
 
 // Constructor
@@ -17,8 +18,8 @@ Motor::Motor(Pin INA, Pin INB, Pin PWM) {
 }
 
 void Motor::init() {
-	INA.PORT.DIRSET = INA.PIN_BM | INB.PIN_BM;
-	PWM.PORT.DIRSET = PWM.PIN_BM;
+	INA.PORT->DIRSET = INA.PIN_BM | INB.PIN_BM;
+	PWM.PORT->DIRSET = PWM.PIN_BM;
 }
 
 void Motor::setDutyCycle(int8_t dutyCycle) {
@@ -40,15 +41,15 @@ void Motor::setDutyCycle(int8_t dutyCycle) {
 
 	// Coast (indpendent of direction)
 	if (dutyCycle == 0) {
-		INA.PORT.OUTCLR = INA.PIN_BM;
-		INB.PORT.OUTCLR = INB.PIN_BM;
+		INA.PORT->OUTCLR = INA.PIN_BM;
+		INB.PORT->OUTCLR = INB.PIN_BM;
 	// Negative
 	} else if (negative) {
-		INA.PORT.OUTCLR = INA.PIN_BM;
-		INB.PORT.OUTSET = INB.PIN_BM;
+		INA.PORT->OUTCLR = INA.PIN_BM;
+		INB.PORT->OUTSET = INB.PIN_BM;
 	// Positive
 	} else {
-		INA.PORT.OUTSET = INA.PIN_BM;
-		INB.PORT.OUTCLR = INB.PIN_BM;
+		INA.PORT->OUTSET = INA.PIN_BM;
+		INB.PORT->OUTCLR = INB.PIN_BM;
 	}
 }

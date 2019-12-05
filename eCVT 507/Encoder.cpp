@@ -17,12 +17,12 @@ Encoder::Encoder(Pin ENC_A, Pin ENC_B) {
 	this->ENC_B = ENC_B;
 
 	// Port Setup
-	ENC_A.PORT.DIRCLR = (ENC_A.PIN_BM | ENC_B.PIN_BM);
+	ENC_A.PORT->DIRCLR = (ENC_A.PIN_BM | ENC_B.PIN_BM);
 
 	/* Set QDPH0 and QDPH1 sensing level. */
 	PORTCFG.MPCMASK |= (ENC_A.PIN_BM);
 	PORTCFG.MPCMASK |= (ENC_B.PIN_BM);
-	ENC_A.PORT.PIN0CTRL = (ENC_A.PORT.PIN0CTRL & ~PORT_ISC_gm) | PORT_ISC_LEVEL_gc
+	ENC_A.PORT->PIN0CTRL = (ENC_A.PORT->PIN0CTRL & ~PORT_ISC_gm) | PORT_ISC_LEVEL_gc
 	                  | (false ? PORT_INVEN_bm : 0);
 
 	// Event System Setup

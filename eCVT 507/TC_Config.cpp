@@ -47,7 +47,7 @@ void TC_Init(){
 
 	// PWM Output Initialization
 	/* Set the TC period. */
-	//TCE0_PER = OxFFFF;
+	TCE0_PER = 20000;
 	/* Configure the TC for single slope mode. */
 	TCE0_CTRLB |= TC_WGMODE_SINGLESLOPE_gc;
 	/* Enable Compare channel C and D. */
@@ -64,11 +64,11 @@ uint32_t micros() {
 void analogWrite(Pin pin, uint8_t dutyCycle) {
 	// Primary Motor
 	if (pin.PIN_BM == P_MOT_PWM.PIN_BM) {
-		TCE0_CCC = 65535;
+		TCE0_CCC = 12000;
 	}
 	// Secondary Motor
 	if (pin.PIN_BM == S_MOT_PWM.PIN_BM) {
-		TCE0_CCD = 0;
+		TCE0_CCD = 12000;
 	}
 }
 
