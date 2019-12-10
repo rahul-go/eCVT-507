@@ -68,6 +68,11 @@ $(function() {
 <div class="title">EngineSpeed Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Header for a class that implements a hall effect sensor to measure engine speed.  
+ <a href="class_engine_speed.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="_engine_speed_8h_source.html">EngineSpeed.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -81,7 +86,10 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:aa1e68329e56cf6dd0ff33ecd02e9af7b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the engine speed in rotations per second.  <a href="#aa1e68329e56cf6dd0ff33ecd02e9af7b">More...</a><br /></td></tr>
 <tr class="separator:aa1e68329e56cf6dd0ff33ecd02e9af7b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Header for a class that implements a hall effect sensor to measure engine speed. </p>
+<p>This class allows the user to implement a hall effect sensor to meausre engine speed. It relies on the user to set up an interrupt service routine to call the calculate function on the rising or falling edge of the signal from a hall effect sensor measuring engine speed. The engine speed is similar to the wheel speed library but also averages the thermodynamic cycle of a four-stroke engine (that is, it averages every two revolutions) to reduce the noise of the output signal. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="abbb3a8246d5db034f984fe367c9d58d4"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#abbb3a8246d5db034f984fe367c9d58d4">&#9670;&nbsp;</a></span>EngineSpeed()</h2>
 
