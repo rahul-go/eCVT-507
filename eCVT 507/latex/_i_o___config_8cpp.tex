@@ -1,0 +1,42 @@
+\hypertarget{_i_o___config_8cpp}{}\section{I\+O\+\_\+\+Config.\+cpp File Reference}
+\label{_i_o___config_8cpp}\index{I\+O\+\_\+\+Config.\+cpp@{I\+O\+\_\+\+Config.\+cpp}}
+
+
+Source code for a library that implements the input/output configuration.  
+
+
+{\ttfamily \#include \char`\"{}I\+O\+\_\+\+Config.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$avr/io.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}Pin.\+h\char`\"{}}\newline
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{_i_o___config_8cpp_a38c9e095965b0fb06d4b2e72d35fbec1}{I\+O\+\_\+\+Init}} ()
+\begin{DoxyCompactList}\small\item\em Sets up the engine speed and wheel speed interrupt pins. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Source code for a library that implements the input/output configuration. 
+
+This library allows the user to configure the inputs/outputs in one place. The library assigns ports and pin numbers via \mbox{\hyperlink{struct_pin}{Pin}} objects to each input/output. Additionally, the library sets up interrupts for the engine speed and rear wheel speed hall effect sensors.
+
+\begin{DoxyAuthor}{Author}
+KC Egger, Rahul Goyal, Alexandros Petrakis
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+2019-\/12-\/09 
+\end{DoxyDate}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{_i_o___config_8cpp_a38c9e095965b0fb06d4b2e72d35fbec1}\label{_i_o___config_8cpp_a38c9e095965b0fb06d4b2e72d35fbec1}} 
+\index{I\+O\+\_\+\+Config.\+cpp@{I\+O\+\_\+\+Config.\+cpp}!I\+O\+\_\+\+Init@{I\+O\+\_\+\+Init}}
+\index{I\+O\+\_\+\+Init@{I\+O\+\_\+\+Init}!I\+O\+\_\+\+Config.\+cpp@{I\+O\+\_\+\+Config.\+cpp}}
+\subsubsection{\texorpdfstring{I\+O\+\_\+\+Init()}{IO\_Init()}}
+{\footnotesize\ttfamily void I\+O\+\_\+\+Init (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Sets up the engine speed and wheel speed interrupt pins. 
+
+This function sets up the engine speed and wheel speed for interrupt functionality. 

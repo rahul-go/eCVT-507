@@ -1,0 +1,27 @@
+\hypertarget{_engine_speed_8h}{}\section{Engine\+Speed.\+h File Reference}
+\label{_engine_speed_8h}\index{Engine\+Speed.\+h@{Engine\+Speed.\+h}}
+
+
+Header for a class that implements a hall effect sensor to measure engine speed.  
+
+
+{\ttfamily \#include $<$stdint.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}T\+C\+\_\+\+Config.\+h\char`\"{}}\newline
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{class_engine_speed}{Engine\+Speed}}
+\begin{DoxyCompactList}\small\item\em Header for a class that implements a hall effect sensor to measure engine speed. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Header for a class that implements a hall effect sensor to measure engine speed. 
+
+This class allows the user to implement a hall effect sensor to meausre engine speed. It relies on the user to set up an interrupt service routine to call the calculate function on the rising or falling edge of the signal from a hall effect sensor measuring engine speed. The engine speed is similar to the wheel speed library but also averages the thermodynamic cycle of a four-\/stroke engine (that is, it averages every two revolutions) to reduce the noise of the output signal.
+
+\begin{DoxyAuthor}{Author}
+KC Egger, Rahul Goyal, Alexandros Petrakis
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+2019-\/12-\/09 
+\end{DoxyDate}

@@ -1,0 +1,74 @@
+\hypertarget{_i_o___config_8h}{}\section{I\+O\+\_\+\+Config.\+h File Reference}
+\label{_i_o___config_8h}\index{I\+O\+\_\+\+Config.\+h@{I\+O\+\_\+\+Config.\+h}}
+
+
+Header for a library that implements the input/output configuration.  
+
+
+{\ttfamily \#include $<$avr/io.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}Pin.\+h\char`\"{}}\newline
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{_i_o___config_8h_a38c9e095965b0fb06d4b2e72d35fbec1}{I\+O\+\_\+\+Init}} ()
+\begin{DoxyCompactList}\small\item\em Sets up the engine speed and wheel speed interrupt pins. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{_i_o___config_8h_a48bdb47e4c40c81dcf6486f9a0eabd0b}\label{_i_o___config_8h_a48bdb47e4c40c81dcf6486f9a0eabd0b}} 
+const \mbox{\hyperlink{struct_pin}{Pin}} {\bfseries P\+\_\+\+M\+O\+T\+\_\+\+I\+NA} = \{\&P\+O\+R\+TA, P\+I\+N0\+\_\+bm\}
+\item 
+\mbox{\Hypertarget{_i_o___config_8h_a7d2dca56086edd94fca16c715dafb29a}\label{_i_o___config_8h_a7d2dca56086edd94fca16c715dafb29a}} 
+const \mbox{\hyperlink{struct_pin}{Pin}} {\bfseries P\+\_\+\+M\+O\+T\+\_\+\+I\+NB} = \{\&P\+O\+R\+TA, P\+I\+N1\+\_\+bm\}
+\item 
+\mbox{\Hypertarget{_i_o___config_8h_af3b663706d7dda56d15a0a33d91b38c8}\label{_i_o___config_8h_af3b663706d7dda56d15a0a33d91b38c8}} 
+const \mbox{\hyperlink{struct_pin}{Pin}} {\bfseries P\+\_\+\+M\+O\+T\+\_\+\+P\+WM} = \{\&P\+O\+R\+TE, P\+I\+N2\+\_\+bm\}
+\item 
+\mbox{\Hypertarget{_i_o___config_8h_ab45fed07c5b31713e1a1166a792dcece}\label{_i_o___config_8h_ab45fed07c5b31713e1a1166a792dcece}} 
+const \mbox{\hyperlink{struct_pin}{Pin}} {\bfseries P\+\_\+\+E\+N\+C\+\_\+A} = \{\&P\+O\+R\+TA, P\+I\+N4\+\_\+bm\}
+\item 
+\mbox{\Hypertarget{_i_o___config_8h_a96dee6c384868566c1af4068b6987540}\label{_i_o___config_8h_a96dee6c384868566c1af4068b6987540}} 
+const \mbox{\hyperlink{struct_pin}{Pin}} {\bfseries P\+\_\+\+E\+N\+C\+\_\+B} = \{\&P\+O\+R\+TA, P\+I\+N5\+\_\+bm\}
+\item 
+\mbox{\Hypertarget{_i_o___config_8h_a15568d3209b2f362ad8214f3e9608311}\label{_i_o___config_8h_a15568d3209b2f362ad8214f3e9608311}} 
+const \mbox{\hyperlink{struct_pin}{Pin}} {\bfseries S\+\_\+\+M\+O\+T\+\_\+\+I\+NA} = \{\&P\+O\+R\+TA, P\+I\+N2\+\_\+bm\}
+\item 
+\mbox{\Hypertarget{_i_o___config_8h_a89a7ba407188363c31f08acf84a8e95a}\label{_i_o___config_8h_a89a7ba407188363c31f08acf84a8e95a}} 
+const \mbox{\hyperlink{struct_pin}{Pin}} {\bfseries S\+\_\+\+M\+O\+T\+\_\+\+I\+NB} = \{\&P\+O\+R\+TA, P\+I\+N3\+\_\+bm\}
+\item 
+\mbox{\Hypertarget{_i_o___config_8h_aecfd3d8739c44a7c28a3b286edec1583}\label{_i_o___config_8h_aecfd3d8739c44a7c28a3b286edec1583}} 
+const \mbox{\hyperlink{struct_pin}{Pin}} {\bfseries S\+\_\+\+M\+O\+T\+\_\+\+P\+WM} = \{\&P\+O\+R\+TE, P\+I\+N3\+\_\+bm\}
+\item 
+\mbox{\Hypertarget{_i_o___config_8h_a84cbf54b13bce81aba8bd4129c0bc3eb}\label{_i_o___config_8h_a84cbf54b13bce81aba8bd4129c0bc3eb}} 
+const \mbox{\hyperlink{struct_pin}{Pin}} {\bfseries S\+\_\+\+E\+N\+C\+\_\+A} = \{\&P\+O\+R\+TA, P\+I\+N6\+\_\+bm\}
+\item 
+\mbox{\Hypertarget{_i_o___config_8h_aea14dcc6d382bfd3fc0e7da16ed1427d}\label{_i_o___config_8h_aea14dcc6d382bfd3fc0e7da16ed1427d}} 
+const \mbox{\hyperlink{struct_pin}{Pin}} {\bfseries S\+\_\+\+E\+N\+C\+\_\+B} = \{\&P\+O\+R\+TA, P\+I\+N7\+\_\+bm\}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Header for a library that implements the input/output configuration. 
+
+This library allows the user to configure the inputs/outputs in one place. The library assigns ports and pin numbers via \mbox{\hyperlink{struct_pin}{Pin}} objects to each input/output. Additionally, the library sets up interrupts for the engine speed and rear wheel speed hall effect sensors.
+
+\begin{DoxyAuthor}{Author}
+KC Egger, Rahul Goyal, Alexandros Petrakis
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+2019-\/12-\/09 
+\end{DoxyDate}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{_i_o___config_8h_a38c9e095965b0fb06d4b2e72d35fbec1}\label{_i_o___config_8h_a38c9e095965b0fb06d4b2e72d35fbec1}} 
+\index{I\+O\+\_\+\+Config.\+h@{I\+O\+\_\+\+Config.\+h}!I\+O\+\_\+\+Init@{I\+O\+\_\+\+Init}}
+\index{I\+O\+\_\+\+Init@{I\+O\+\_\+\+Init}!I\+O\+\_\+\+Config.\+h@{I\+O\+\_\+\+Config.\+h}}
+\subsubsection{\texorpdfstring{I\+O\+\_\+\+Init()}{IO\_Init()}}
+{\footnotesize\ttfamily void I\+O\+\_\+\+Init (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Sets up the engine speed and wheel speed interrupt pins. 
+
+This function sets up the engine speed and wheel speed for interrupt functionality. 

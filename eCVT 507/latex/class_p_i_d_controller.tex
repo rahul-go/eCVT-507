@@ -1,0 +1,193 @@
+\hypertarget{class_p_i_d_controller}{}\section{P\+I\+D\+Controller Class Reference}
+\label{class_p_i_d_controller}\index{P\+I\+D\+Controller@{P\+I\+D\+Controller}}
+
+
+Class that implements a P\+ID Controller.  
+
+
+
+
+{\ttfamily \#include $<$P\+I\+D\+Controller.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_p_i_d_controller_a4385346211da5ffcd4872f9a77a40b6b}{P\+I\+D\+Controller}} (float Kp, float Ki, float Kd)
+\begin{DoxyCompactList}\small\item\em Constructor which creates and initializes a motor object. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_p_i_d_controller_aa3f88f9bfd07c96e1af116056ea2f368}{set\+Kp}} (float Kp)
+\begin{DoxyCompactList}\small\item\em Updates the proportional gain. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_p_i_d_controller_a8d9a587dbc3d2432e6927551402d81d7}{set\+Ki}} (float Ki)
+\begin{DoxyCompactList}\small\item\em Updates the integral gain. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_p_i_d_controller_aa6fd9ebf0835ad90a20f38df6615e1f3}{set\+Kd}} (float Kd)
+\begin{DoxyCompactList}\small\item\em Updates the derivative gain. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_p_i_d_controller_a1afeb11fdafe29e44a61c49502990dd0}{set\+Setpoint}} (int32\+\_\+t setpoint)
+\begin{DoxyCompactList}\small\item\em Updates the setpoint. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_p_i_d_controller_ab1ef75c91c9d2c7e52c328194063d870}{set\+Lo\+Sat}} (int8\+\_\+t lo\+Sat)
+\begin{DoxyCompactList}\small\item\em Updates the low saturation limit. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_p_i_d_controller_ad71f9567e88aabf607375c0f5c513a92}{set\+Hi\+Sat}} (int8\+\_\+t hi\+Sat)
+\begin{DoxyCompactList}\small\item\em Updates the high saturation limit. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_p_i_d_controller_adfe56699c7f330bdacbd1240ca7e1a38}{calc}} (int32\+\_\+t measurement)
+\begin{DoxyCompactList}\small\item\em Update the previous error, the error, the integral, and the derivative. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{class_p_i_d_controller_a9691a50160d89b3aac20fad29293a797}{get}} ()
+\begin{DoxyCompactList}\small\item\em Update the saturation status and return the P\+ID output. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_p_i_d_controller_ab6adfbffa30414f0a83b95ba999a2fea}{reset}} ()
+\begin{DoxyCompactList}\small\item\em Reset the calculated integral and derivative to zero. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Class that implements a P\+ID Controller. 
+
+This class allows the user to implement a P\+ID Controller. It is given a setpoint, low saturation, high saturation, and Kp, Ki, and Kd gain values. In addition to providing P\+ID output, the class accounts for integral windup by disabling the integral term if the output is determined as saturated. The class can also serve as a P-\/\+Only, PI, or PD controller by setting the appropriate gains to 0, although this does result in some unnecessary calculations. 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_p_i_d_controller_a4385346211da5ffcd4872f9a77a40b6b}\label{class_p_i_d_controller_a4385346211da5ffcd4872f9a77a40b6b}} 
+\index{P\+I\+D\+Controller@{P\+I\+D\+Controller}!P\+I\+D\+Controller@{P\+I\+D\+Controller}}
+\index{P\+I\+D\+Controller@{P\+I\+D\+Controller}!P\+I\+D\+Controller@{P\+I\+D\+Controller}}
+\subsubsection{\texorpdfstring{P\+I\+D\+Controller()}{PIDController()}}
+{\footnotesize\ttfamily P\+I\+D\+Controller\+::\+P\+I\+D\+Controller (\begin{DoxyParamCaption}\item[{float}]{Kp,  }\item[{float}]{Ki,  }\item[{float}]{Kd }\end{DoxyParamCaption})}
+
+
+
+Constructor which creates and initializes a motor object. 
+
+This constructor creates a P\+ID controller object with a given proportional gain, integral gain, and derivative gain. If a P-\/\+Only, PI, or PD controller is desired, set the other gains to zero. 
+\begin{DoxyParams}{Parameters}
+{\em Kp} & The proportional gain for the controller. \\
+\hline
+{\em Ki} & The integral gain for the controller. \\
+\hline
+{\em Kd} & The derivative gain for the controller. \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_p_i_d_controller_adfe56699c7f330bdacbd1240ca7e1a38}\label{class_p_i_d_controller_adfe56699c7f330bdacbd1240ca7e1a38}} 
+\index{P\+I\+D\+Controller@{P\+I\+D\+Controller}!calc@{calc}}
+\index{calc@{calc}!P\+I\+D\+Controller@{P\+I\+D\+Controller}}
+\subsubsection{\texorpdfstring{calc()}{calc()}}
+{\footnotesize\ttfamily void P\+I\+D\+Controller\+::calc (\begin{DoxyParamCaption}\item[{int32\+\_\+t}]{measurement }\end{DoxyParamCaption})}
+
+
+
+Update the previous error, the error, the integral, and the derivative. 
+
+This function updates the previous error, the error, the integral, and the derivative values. These values can be used to calculate the P\+ID output and saturation status, but this calculation is left until the \mbox{\hyperlink{class_p_i_d_controller_a9691a50160d89b3aac20fad29293a797}{get()}} function is called to minimize the time spent in the interrupt service routine. \mbox{\Hypertarget{class_p_i_d_controller_a9691a50160d89b3aac20fad29293a797}\label{class_p_i_d_controller_a9691a50160d89b3aac20fad29293a797}} 
+\index{P\+I\+D\+Controller@{P\+I\+D\+Controller}!get@{get}}
+\index{get@{get}!P\+I\+D\+Controller@{P\+I\+D\+Controller}}
+\subsubsection{\texorpdfstring{get()}{get()}}
+{\footnotesize\ttfamily float P\+I\+D\+Controller\+::get (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Update the saturation status and return the P\+ID output. 
+
+This function calculatest the P\+ID output. It then compares the calculated output to the low saturation limit and the high saturation limit. If the P\+ID output is outside of the saturation limits, the saturation status is set to true, else it is set to false. The P\+ID output is then returned. \begin{DoxyReturn}{Returns}
+get The P\+ID output as a float. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_p_i_d_controller_ab6adfbffa30414f0a83b95ba999a2fea}\label{class_p_i_d_controller_ab6adfbffa30414f0a83b95ba999a2fea}} 
+\index{P\+I\+D\+Controller@{P\+I\+D\+Controller}!reset@{reset}}
+\index{reset@{reset}!P\+I\+D\+Controller@{P\+I\+D\+Controller}}
+\subsubsection{\texorpdfstring{reset()}{reset()}}
+{\footnotesize\ttfamily void P\+I\+D\+Controller\+::reset (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Reset the calculated integral and derivative to zero. 
+
+This function resets the calculated integral and derivative to zero so that the P\+ID controller can be re-\/entered without an affect from old data. \mbox{\Hypertarget{class_p_i_d_controller_ad71f9567e88aabf607375c0f5c513a92}\label{class_p_i_d_controller_ad71f9567e88aabf607375c0f5c513a92}} 
+\index{P\+I\+D\+Controller@{P\+I\+D\+Controller}!set\+Hi\+Sat@{set\+Hi\+Sat}}
+\index{set\+Hi\+Sat@{set\+Hi\+Sat}!P\+I\+D\+Controller@{P\+I\+D\+Controller}}
+\subsubsection{\texorpdfstring{set\+Hi\+Sat()}{setHiSat()}}
+{\footnotesize\ttfamily void P\+I\+D\+Controller\+::set\+Hi\+Sat (\begin{DoxyParamCaption}\item[{int8\+\_\+t}]{hi\+Sat }\end{DoxyParamCaption})}
+
+
+
+Updates the high saturation limit. 
+
+This function updates the high saturation limit to a new value during use. 
+\begin{DoxyParams}{Parameters}
+{\em hi\+Sat} & The new high saturation limit for the controller. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_p_i_d_controller_aa6fd9ebf0835ad90a20f38df6615e1f3}\label{class_p_i_d_controller_aa6fd9ebf0835ad90a20f38df6615e1f3}} 
+\index{P\+I\+D\+Controller@{P\+I\+D\+Controller}!set\+Kd@{set\+Kd}}
+\index{set\+Kd@{set\+Kd}!P\+I\+D\+Controller@{P\+I\+D\+Controller}}
+\subsubsection{\texorpdfstring{set\+Kd()}{setKd()}}
+{\footnotesize\ttfamily void P\+I\+D\+Controller\+::set\+Kd (\begin{DoxyParamCaption}\item[{float}]{Kd }\end{DoxyParamCaption})}
+
+
+
+Updates the derivative gain. 
+
+This function updates the derivative gain to a new value during use. 
+\begin{DoxyParams}{Parameters}
+{\em Kd} & The new derivative gain for the controller. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_p_i_d_controller_a8d9a587dbc3d2432e6927551402d81d7}\label{class_p_i_d_controller_a8d9a587dbc3d2432e6927551402d81d7}} 
+\index{P\+I\+D\+Controller@{P\+I\+D\+Controller}!set\+Ki@{set\+Ki}}
+\index{set\+Ki@{set\+Ki}!P\+I\+D\+Controller@{P\+I\+D\+Controller}}
+\subsubsection{\texorpdfstring{set\+Ki()}{setKi()}}
+{\footnotesize\ttfamily void P\+I\+D\+Controller\+::set\+Ki (\begin{DoxyParamCaption}\item[{float}]{Ki }\end{DoxyParamCaption})}
+
+
+
+Updates the integral gain. 
+
+This function updates the integral gain to a new value during use. 
+\begin{DoxyParams}{Parameters}
+{\em Ki} & The new integral gain for the controller. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_p_i_d_controller_aa3f88f9bfd07c96e1af116056ea2f368}\label{class_p_i_d_controller_aa3f88f9bfd07c96e1af116056ea2f368}} 
+\index{P\+I\+D\+Controller@{P\+I\+D\+Controller}!set\+Kp@{set\+Kp}}
+\index{set\+Kp@{set\+Kp}!P\+I\+D\+Controller@{P\+I\+D\+Controller}}
+\subsubsection{\texorpdfstring{set\+Kp()}{setKp()}}
+{\footnotesize\ttfamily void P\+I\+D\+Controller\+::set\+Kp (\begin{DoxyParamCaption}\item[{float}]{Kp }\end{DoxyParamCaption})}
+
+
+
+Updates the proportional gain. 
+
+This function updates the proportional gain to a new value during use. 
+\begin{DoxyParams}{Parameters}
+{\em Kp} & The new proportional gain for the controller. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_p_i_d_controller_ab1ef75c91c9d2c7e52c328194063d870}\label{class_p_i_d_controller_ab1ef75c91c9d2c7e52c328194063d870}} 
+\index{P\+I\+D\+Controller@{P\+I\+D\+Controller}!set\+Lo\+Sat@{set\+Lo\+Sat}}
+\index{set\+Lo\+Sat@{set\+Lo\+Sat}!P\+I\+D\+Controller@{P\+I\+D\+Controller}}
+\subsubsection{\texorpdfstring{set\+Lo\+Sat()}{setLoSat()}}
+{\footnotesize\ttfamily void P\+I\+D\+Controller\+::set\+Lo\+Sat (\begin{DoxyParamCaption}\item[{int8\+\_\+t}]{lo\+Sat }\end{DoxyParamCaption})}
+
+
+
+Updates the low saturation limit. 
+
+This function updates the low saturation limit to a new value during use. 
+\begin{DoxyParams}{Parameters}
+{\em lo\+Sat} & The new low saturation limit for the controller. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_p_i_d_controller_a1afeb11fdafe29e44a61c49502990dd0}\label{class_p_i_d_controller_a1afeb11fdafe29e44a61c49502990dd0}} 
+\index{P\+I\+D\+Controller@{P\+I\+D\+Controller}!set\+Setpoint@{set\+Setpoint}}
+\index{set\+Setpoint@{set\+Setpoint}!P\+I\+D\+Controller@{P\+I\+D\+Controller}}
+\subsubsection{\texorpdfstring{set\+Setpoint()}{setSetpoint()}}
+{\footnotesize\ttfamily void P\+I\+D\+Controller\+::set\+Setpoint (\begin{DoxyParamCaption}\item[{int32\+\_\+t}]{setpoint }\end{DoxyParamCaption})}
+
+
+
+Updates the setpoint. 
+
+This function updates the setpoint to a new value during use. 
+\begin{DoxyParams}{Parameters}
+{\em setpoint} & The new proportional gain for the controller. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{_p_i_d_controller_8h}{P\+I\+D\+Controller.\+h}}\item 
+\mbox{\hyperlink{_p_i_d_controller_8cpp}{P\+I\+D\+Controller.\+cpp}}\end{DoxyCompactItemize}

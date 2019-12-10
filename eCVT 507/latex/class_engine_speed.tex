@@ -1,0 +1,75 @@
+\hypertarget{class_engine_speed}{}\section{Engine\+Speed Class Reference}
+\label{class_engine_speed}\index{Engine\+Speed@{Engine\+Speed}}
+
+
+Header for a class that implements a hall effect sensor to measure engine speed.  
+
+
+
+
+{\ttfamily \#include $<$Engine\+Speed.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_engine_speed_abbb3a8246d5db034f984fe367c9d58d4}{Engine\+Speed}} (uint8\+\_\+t triggers)
+\begin{DoxyCompactList}\small\item\em Constructor which creates and initializes an engine speed object. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_engine_speed_a760d5c7e84e92e0fe42d56d2e7cf2a42}{calc}} ()
+\begin{DoxyCompactList}\small\item\em Update the current time and previous time to calculate the engine speed. \end{DoxyCompactList}\item 
+uint16\+\_\+t \mbox{\hyperlink{class_engine_speed_aa1e68329e56cf6dd0ff33ecd02e9af7b}{get}} ()
+\begin{DoxyCompactList}\small\item\em Return the engine speed in rotations per second. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Header for a class that implements a hall effect sensor to measure engine speed. 
+
+This class allows the user to implement a hall effect sensor to meausre engine speed. It relies on the user to set up an interrupt service routine to call the calculate function on the rising or falling edge of the signal from a hall effect sensor measuring engine speed. The engine speed is similar to the wheel speed library but also averages the thermodynamic cycle of a four-\/stroke engine (that is, it averages every two revolutions) to reduce the noise of the output signal. 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_engine_speed_abbb3a8246d5db034f984fe367c9d58d4}\label{class_engine_speed_abbb3a8246d5db034f984fe367c9d58d4}} 
+\index{Engine\+Speed@{Engine\+Speed}!Engine\+Speed@{Engine\+Speed}}
+\index{Engine\+Speed@{Engine\+Speed}!Engine\+Speed@{Engine\+Speed}}
+\subsubsection{\texorpdfstring{Engine\+Speed()}{EngineSpeed()}}
+{\footnotesize\ttfamily Engine\+Speed\+::\+Engine\+Speed (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{triggers }\end{DoxyParamCaption})}
+
+
+
+Constructor which creates and initializes an engine speed object. 
+
+This constructor creates an wheel speed object with the given number of triggers. It saves the number of triggers and initializes the \char`\"{}previous\char`\"{} and \char`\"{}current\char`\"{} times. 
+\begin{DoxyParams}{Parameters}
+{\em triggers} & The number of triggers per revolution of the wheel. \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_engine_speed_a760d5c7e84e92e0fe42d56d2e7cf2a42}\label{class_engine_speed_a760d5c7e84e92e0fe42d56d2e7cf2a42}} 
+\index{Engine\+Speed@{Engine\+Speed}!calc@{calc}}
+\index{calc@{calc}!Engine\+Speed@{Engine\+Speed}}
+\subsubsection{\texorpdfstring{calc()}{calc()}}
+{\footnotesize\ttfamily void Engine\+Speed\+::calc (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Update the current time and previous time to calculate the engine speed. 
+
+This function stores the \char`\"{}current\char`\"{} time as the previous time and assign the current time to current time. These values can be used to calculate the wheel speed, but this calculation is left until the \mbox{\hyperlink{class_engine_speed_aa1e68329e56cf6dd0ff33ecd02e9af7b}{get()}} function is called to minimize the time spent in the interrupt service routing. The previous time is stored to the respective trigger position, then the position is incremented. If the position increases to a number greater than the number of triggers, the position is reset to zero. \mbox{\Hypertarget{class_engine_speed_aa1e68329e56cf6dd0ff33ecd02e9af7b}\label{class_engine_speed_aa1e68329e56cf6dd0ff33ecd02e9af7b}} 
+\index{Engine\+Speed@{Engine\+Speed}!get@{get}}
+\index{get@{get}!Engine\+Speed@{Engine\+Speed}}
+\subsubsection{\texorpdfstring{get()}{get()}}
+{\footnotesize\ttfamily uint16\+\_\+t Engine\+Speed\+::get (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Return the engine speed in rotations per second. 
+
+This function calculates the wheel speed using the stored previous time and stored current time. The time between triggers is multipled by the number of triggers to calculate the time required for one revolution in microseconds. The constant 1\+E6 is divided by this time to get rotations per second. The previous time retrieved is from the current trigger position. \begin{DoxyReturn}{Returns}
+The wheel speed in rotations per second as a float. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{_engine_speed_8h}{Engine\+Speed.\+h}}\item 
+\mbox{\hyperlink{_engine_speed_8cpp}{Engine\+Speed.\+cpp}}\end{DoxyCompactItemize}

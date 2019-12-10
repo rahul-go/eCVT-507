@@ -1,0 +1,29 @@
+\hypertarget{_wheel_speed_8cpp}{}\section{Wheel\+Speed.\+cpp File Reference}
+\label{_wheel_speed_8cpp}\index{Wheel\+Speed.\+cpp@{Wheel\+Speed.\+cpp}}
+
+
+Source code for a class that implements a hall effect sensor to measure wheel speed.  
+
+
+{\ttfamily \#include \char`\"{}Wheel\+Speed.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$stdint.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}T\+C\+\_\+\+Config.\+h\char`\"{}}\newline
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{_wheel_speed_8cpp_abc441f2ce5ea3d7b4583b648454614c5}\label{_wheel_speed_8cpp_abc441f2ce5ea3d7b4583b648454614c5}} 
+const uint32\+\_\+t {\bfseries T\+I\+M\+E\+O\+UT} = 1000000
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Source code for a class that implements a hall effect sensor to measure wheel speed. 
+
+This class allows the user to implement a hall effect sensor to meausre wheel speed. It relies on the user to set up an interrupt service routine to call the calculate function on the rising or falling edge of the signal from a hall effect sensor measuring wheel speed.
+
+\begin{DoxyAuthor}{Author}
+KC Egger, Rahul Goyal, Alexandros Petrakis
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+2019-\/12-\/09 
+\end{DoxyDate}

@@ -1,0 +1,77 @@
+\hypertarget{class_encoder}{}\section{Encoder Class Reference}
+\label{class_encoder}\index{Encoder@{Encoder}}
+
+
+Class that implements an encoder.  
+
+
+
+
+{\ttfamily \#include $<$Encoder.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_encoder_a93f2fbbe579422d267b87cf7a6673caf}{Encoder}} (\mbox{\hyperlink{struct_pin}{Pin}} E\+N\+C\+\_\+A, \mbox{\hyperlink{struct_pin}{Pin}} E\+N\+C\+\_\+B)
+\begin{DoxyCompactList}\small\item\em Constructor which creates and initializes an encoder object. \end{DoxyCompactList}\item 
+uint16\+\_\+t \mbox{\hyperlink{class_encoder_a1d80d4b27aadd5198902d29b08b54b4c}{read}} ()
+\begin{DoxyCompactList}\small\item\em Return the encoder position. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_encoder_a0d3bf72860cbdc4cd62ed0019a3c8aef}{zero}} ()
+\begin{DoxyCompactList}\small\item\em Zero the encoder position. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Class that implements an encoder. 
+
+This class allows the user to implement an encoder on either Timer D0, Event Channel 2 or Timer D1, Event Channel 3. Future updates will allow for the timer and event channel to be chosen independently by the user via parameters in the constructor. Each encoder object of this class can read from and written to independently. 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_encoder_a93f2fbbe579422d267b87cf7a6673caf}\label{class_encoder_a93f2fbbe579422d267b87cf7a6673caf}} 
+\index{Encoder@{Encoder}!Encoder@{Encoder}}
+\index{Encoder@{Encoder}!Encoder@{Encoder}}
+\subsubsection{\texorpdfstring{Encoder()}{Encoder()}}
+{\footnotesize\ttfamily Encoder\+::\+Encoder (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_pin}{Pin}}}]{E\+N\+C\+\_\+A,  }\item[{\mbox{\hyperlink{struct_pin}{Pin}}}]{E\+N\+C\+\_\+B }\end{DoxyParamCaption})}
+
+
+
+Constructor which creates and initializes an encoder object. 
+
+This constructor creates an encoder object with the given pins. It saves the pins and sets the pins for input. It sets Q\+D\+P\+H0 and Q\+D\+P\+H1 sening level. It sets up the event system depending on the encoder. Future updates will allow for the the timer and event channel to be chosen independently by the user via parameters in the constructor. 
+\begin{DoxyParams}{Parameters}
+{\em E\+N\+C\+\_\+A} & The first signal pin of the encoder. \\
+\hline
+{\em E\+N\+C\+\_\+B} & The second signal pin of the encoder. \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_encoder_a1d80d4b27aadd5198902d29b08b54b4c}\label{class_encoder_a1d80d4b27aadd5198902d29b08b54b4c}} 
+\index{Encoder@{Encoder}!read@{read}}
+\index{read@{read}!Encoder@{Encoder}}
+\subsubsection{\texorpdfstring{read()}{read()}}
+{\footnotesize\ttfamily uint16\+\_\+t Encoder\+::read (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Return the encoder position. 
+
+This function retrieves the timer count and returns it as an unsigned 16-\/bit number representing the encoder position. \begin{DoxyReturn}{Returns}
+The encoder position in ticks as an unsigned 16-\/bit number. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_encoder_a0d3bf72860cbdc4cd62ed0019a3c8aef}\label{class_encoder_a0d3bf72860cbdc4cd62ed0019a3c8aef}} 
+\index{Encoder@{Encoder}!zero@{zero}}
+\index{zero@{zero}!Encoder@{Encoder}}
+\subsubsection{\texorpdfstring{zero()}{zero()}}
+{\footnotesize\ttfamily void Encoder\+::zero (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Zero the encoder position. 
+
+This function sets the timer count representing the encoder position to zero. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{_encoder_8h}{Encoder.\+h}}\item 
+\mbox{\hyperlink{_encoder_8cpp}{Encoder.\+cpp}}\end{DoxyCompactItemize}

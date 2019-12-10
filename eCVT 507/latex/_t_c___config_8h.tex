@@ -1,0 +1,77 @@
+\hypertarget{_t_c___config_8h}{}\section{T\+C\+\_\+\+Config.\+h File Reference}
+\label{_t_c___config_8h}\index{T\+C\+\_\+\+Config.\+h@{T\+C\+\_\+\+Config.\+h}}
+
+
+Source code for a header that implements the timer/counter configuration.  
+
+
+{\ttfamily \#include $<$avr/io.\+h$>$}\newline
+{\ttfamily \#include $<$stdint.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}I\+O\+\_\+\+Config.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}Pin.\+h\char`\"{}}\newline
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{_t_c___config_8h_a7c46b5a771810d4cf48592ff00dadc90}{T\+C\+\_\+\+Init}} ()
+\begin{DoxyCompactList}\small\item\em Sets up the timer configuration. \end{DoxyCompactList}\item 
+uint32\+\_\+t \mbox{\hyperlink{_t_c___config_8h_a2b97cb2cd2661deade2d301d38c4ebe8}{micros}} ()
+\begin{DoxyCompactList}\small\item\em Returns the system time. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_t_c___config_8h_a98a6b08ddd520c51a5a82d560edfd94f}{analog\+Write}} (\mbox{\hyperlink{struct_pin}{Pin}} pin, uint8\+\_\+t value)
+\begin{DoxyCompactList}\small\item\em Returns the system time. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Source code for a header that implements the timer/counter configuration. 
+
+This library allows the user to configure the timers/counters in one place. System time is retrieved using the \mbox{\hyperlink{_t_c___config_8h_a2b97cb2cd2661deade2d301d38c4ebe8}{micros()}} function, meant to simulate the function on the Arduino but with 1us precision. P\+WM duty cycle is written on Timer E0 using the \mbox{\hyperlink{_t_c___config_8h_a98a6b08ddd520c51a5a82d560edfd94f}{analog\+Write()}} function, meant to simulate the function on the Arduino. Future updates will allow for the timer and event channel to be chosen independently by the user via parameters in the constructor.
+
+\begin{DoxyAuthor}{Author}
+KC Egger, Rahul Goyal, Alexandros Petrakis
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+2019-\/12-\/09 
+\end{DoxyDate}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{_t_c___config_8h_a98a6b08ddd520c51a5a82d560edfd94f}\label{_t_c___config_8h_a98a6b08ddd520c51a5a82d560edfd94f}} 
+\index{T\+C\+\_\+\+Config.\+h@{T\+C\+\_\+\+Config.\+h}!analog\+Write@{analog\+Write}}
+\index{analog\+Write@{analog\+Write}!T\+C\+\_\+\+Config.\+h@{T\+C\+\_\+\+Config.\+h}}
+\subsubsection{\texorpdfstring{analog\+Write()}{analogWrite()}}
+{\footnotesize\ttfamily void analog\+Write (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_pin}{Pin}}}]{pin,  }\item[{uint8\+\_\+t}]{duty\+Cycle }\end{DoxyParamCaption})}
+
+
+
+Returns the system time. 
+
+This function concatenates the values of two 16-\/bit timers to return the system time as a 32-\/bit timer. 
+\begin{DoxyParams}{Parameters}
+{\em pin} & The pin to write the P\+WM duty cycle to. \\
+\hline
+{\em duty\+Cycle} & The duty cycle to write, between -\/100 and 100. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{_t_c___config_8h_a2b97cb2cd2661deade2d301d38c4ebe8}\label{_t_c___config_8h_a2b97cb2cd2661deade2d301d38c4ebe8}} 
+\index{T\+C\+\_\+\+Config.\+h@{T\+C\+\_\+\+Config.\+h}!micros@{micros}}
+\index{micros@{micros}!T\+C\+\_\+\+Config.\+h@{T\+C\+\_\+\+Config.\+h}}
+\subsubsection{\texorpdfstring{micros()}{micros()}}
+{\footnotesize\ttfamily uint32\+\_\+t micros (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Returns the system time. 
+
+This function concatenates the values of two 16-\/bit timers to return the system time as a 32-\/bit timer. \begin{DoxyReturn}{Returns}
+The system time in microseconds as an unsigned 32-\/bit number. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{_t_c___config_8h_a7c46b5a771810d4cf48592ff00dadc90}\label{_t_c___config_8h_a7c46b5a771810d4cf48592ff00dadc90}} 
+\index{T\+C\+\_\+\+Config.\+h@{T\+C\+\_\+\+Config.\+h}!T\+C\+\_\+\+Init@{T\+C\+\_\+\+Init}}
+\index{T\+C\+\_\+\+Init@{T\+C\+\_\+\+Init}!T\+C\+\_\+\+Config.\+h@{T\+C\+\_\+\+Config.\+h}}
+\subsubsection{\texorpdfstring{T\+C\+\_\+\+Init()}{TC\_Init()}}
+{\footnotesize\ttfamily void T\+C\+\_\+\+Init (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Sets up the timer configuration. 
+
+This function sets up the system clock timer, timer interrupt, encoder counters, and P\+WM output. 

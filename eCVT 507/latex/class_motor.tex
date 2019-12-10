@@ -1,0 +1,81 @@
+\hypertarget{class_motor}{}\section{Motor Class Reference}
+\label{class_motor}\index{Motor@{Motor}}
+
+
+Class that implements a motor.  
+
+
+
+
+{\ttfamily \#include $<$Motor.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_motor_ad037c65c0ec24556b7c7c367f42e3686}{Motor}} (\mbox{\hyperlink{struct_pin}{Pin}} I\+NA, \mbox{\hyperlink{struct_pin}{Pin}} I\+NB, \mbox{\hyperlink{struct_pin}{Pin}} P\+WM)
+\begin{DoxyCompactList}\small\item\em Constructor which creates and initializes a motor object. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_motor_ac33814c8814d6b576531149ee945516d}{init}} ()
+\begin{DoxyCompactList}\small\item\em Configures the pins. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_motor_aedb11319566abc8f5297454a0d6833c4}{set\+Duty\+Cycle}} (int8\+\_\+t duty\+Cycle)
+\begin{DoxyCompactList}\small\item\em Sets the duty cycle. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Class that implements a motor. 
+
+This class allows the user to implement a motor. The motor will respond to a duty cycle between -\/100 and 100, with a duty cycle of 0 causing the motor to coast regardless of direction. Each motor object of this class can controlled independently. 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_motor_ad037c65c0ec24556b7c7c367f42e3686}\label{class_motor_ad037c65c0ec24556b7c7c367f42e3686}} 
+\index{Motor@{Motor}!Motor@{Motor}}
+\index{Motor@{Motor}!Motor@{Motor}}
+\subsubsection{\texorpdfstring{Motor()}{Motor()}}
+{\footnotesize\ttfamily Motor\+::\+Motor (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_pin}{Pin}}}]{I\+NA,  }\item[{\mbox{\hyperlink{struct_pin}{Pin}}}]{I\+NB,  }\item[{\mbox{\hyperlink{struct_pin}{Pin}}}]{P\+WM }\end{DoxyParamCaption})}
+
+
+
+Constructor which creates and initializes a motor object. 
+
+This constructor creates a motor object with the given pins. 
+\begin{DoxyParams}{Parameters}
+{\em I\+NA} & The first direction pin of the motor driver. \\
+\hline
+{\em I\+NB} & The second direction pin of the motor driver. \\
+\hline
+{\em P\+WM} & The duty cycle pin of the motor driver. \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_motor_ac33814c8814d6b576531149ee945516d}\label{class_motor_ac33814c8814d6b576531149ee945516d}} 
+\index{Motor@{Motor}!init@{init}}
+\index{init@{init}!Motor@{Motor}}
+\subsubsection{\texorpdfstring{init()}{init()}}
+{\footnotesize\ttfamily void Motor\+::init (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Configures the pins. 
+
+This function configures the direction pins (that is, I\+NA and I\+NB) and duty cycle pin (that is, P\+WM) as output pins. \mbox{\Hypertarget{class_motor_aedb11319566abc8f5297454a0d6833c4}\label{class_motor_aedb11319566abc8f5297454a0d6833c4}} 
+\index{Motor@{Motor}!set\+Duty\+Cycle@{set\+Duty\+Cycle}}
+\index{set\+Duty\+Cycle@{set\+Duty\+Cycle}!Motor@{Motor}}
+\subsubsection{\texorpdfstring{set\+Duty\+Cycle()}{setDutyCycle()}}
+{\footnotesize\ttfamily void Motor\+::set\+Duty\+Cycle (\begin{DoxyParamCaption}\item[{int8\+\_\+t}]{duty\+Cycle }\end{DoxyParamCaption})}
+
+
+
+Sets the duty cycle. 
+
+This function takes a duty cycle between -\/100 and 100 to write as a P\+WM signal to the motor driver. It automatically writes to the direction pins depending on the sign of the duty cycle and scales the absolute value of the provided duty cycle to the P\+WM pin. 
+\begin{DoxyParams}{Parameters}
+{\em duty\+Cycle} & the duty cycle the motor is set to \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{_motor_8h}{Motor.\+h}}\item 
+\mbox{\hyperlink{_motor_8cpp}{Motor.\+cpp}}\end{DoxyCompactItemize}

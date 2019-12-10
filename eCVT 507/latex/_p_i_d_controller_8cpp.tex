@@ -1,0 +1,22 @@
+\hypertarget{_p_i_d_controller_8cpp}{}\section{P\+I\+D\+Controller.\+cpp File Reference}
+\label{_p_i_d_controller_8cpp}\index{P\+I\+D\+Controller.\+cpp@{P\+I\+D\+Controller.\+cpp}}
+
+
+Source code for a class that implements a P\+ID Controller.  
+
+
+{\ttfamily \#include \char`\"{}P\+I\+D\+Controller.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$stdint.\+h$>$}\newline
+
+
+\subsection{Detailed Description}
+Source code for a class that implements a P\+ID Controller. 
+
+This class allows the user to implement a P\+ID Controller. It is given a setpoint, low saturation, high saturation, and Kp, Ki, and Kd gain values. In addition to providing P\+ID output, the class accounts for integral windup by disabling the integral term if the output is determined as saturated. The class can also serve as a P-\/\+Only, PI, or PD controller by setting the appropriate gains to 0, although this does result in some unnecessary calculations.
+
+\begin{DoxyAuthor}{Author}
+KC Egger, Rahul Goyal, Alexandros Petrakis
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+2019-\/12-\/09 
+\end{DoxyDate}

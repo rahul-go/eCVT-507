@@ -1,0 +1,25 @@
+\hypertarget{_motor_8cpp}{}\section{Motor.\+cpp File Reference}
+\label{_motor_8cpp}\index{Motor.\+cpp@{Motor.\+cpp}}
+
+
+Source code for a class that implements a motor.  
+
+
+{\ttfamily \#include \char`\"{}Motor.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}avr/io.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$stdint.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}T\+C\+\_\+\+Config.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}Pin.\+h\char`\"{}}\newline
+
+
+\subsection{Detailed Description}
+Source code for a class that implements a motor. 
+
+This class allows the user to implement a motor. The motor will respond to a duty cycle between -\/100 and 100, with a duty cycle of 0 causing the motor to coast regardless of direction. Each motor object of this class can controlled independently.
+
+\begin{DoxyAuthor}{Author}
+KC Egger, Rahul Goyal, Alexandros Petrakis
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+2019-\/12-\/09 
+\end{DoxyDate}
