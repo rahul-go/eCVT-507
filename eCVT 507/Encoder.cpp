@@ -26,8 +26,8 @@
  *				on the encoder. Future updates will allow for the the timer
  *				and event channel to be chosen independently by the user via
  *				parameters in the constructor.
- *  @param		The first signal pin of the encoder.
- *	@param		The second signal pin of the encoder.
+ *  @param		ENC_A The first signal pin of the encoder.
+ *	@param		ENC_B The second signal pin of the encoder.
  */
 Encoder::Encoder(Pin ENC_A, Pin ENC_B) {
 

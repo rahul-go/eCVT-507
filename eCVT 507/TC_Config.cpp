@@ -85,8 +85,8 @@ uint32_t micros() {
 /** @brief		Returns the system time.
  *  @details	This function concatenates the values of two 16-bit timers to
  *				return the system time as a 32-bit timer.
- *	@param		The pin to write the PWM duty cycle to.
- *	@param		The duty cycle to write, between -100 and 100.
+ *	@param		pin The pin to write the PWM duty cycle to.
+ *	@param		dutyCycle The duty cycle to write, between -100 and 100.
  */
 void analogWrite(Pin pin, uint8_t dutyCycle) {
 	// Primary Motor

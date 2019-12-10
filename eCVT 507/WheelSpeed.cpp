@@ -23,7 +23,7 @@ const uint32_t TIMEOUT = 1000000;
  *  @details	This constructor creates an wheel speed object with the given
  *				number of triggers. It saves the number of triggers and
  *				initializes the "previous" and "current" times.
- *  @param		The number of triggers per wheel revolution.
+ *  @param		triggers The number of triggers per wheel revolution.
  */
 WheelSpeed::WheelSpeed(uint8_t triggers) {
 	// Initialize variables
@@ -52,7 +52,6 @@ void WheelSpeed::calc() {
  *				the time required for one revolution in microseconds. The
  *				constant 1E6 is divided by this time to get rotations per
  *				second.
- *  @param		The number of triggers per wheel revolution.
  *	@return		The wheel speed in rotations per second as a float.
  */
 float WheelSpeed::get() {
