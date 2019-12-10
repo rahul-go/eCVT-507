@@ -1,8 +1,17 @@
-/*
- *	IOConfig.h - Library header for input/output configuration.
- *	Created by KC Egger and Rahul Goyal, November 1, 2019.
- *	Released to Cal Poly Baja SAE. ;)
- */
+//*****************************************************************************
+/**	@file		IO_Config.h
+ *	@brief		Header for a library that implements the input/output
+ *				configuration.
+ *	@details	This library allows the user to configure the inputs/outputs
+ *				in one place. The library assigns ports and pin numbers via Pin
+ *				objects to each input/output. Additionally, the library sets up
+ *				interrupts for the engine speed and rear wheel speed hall
+ *				effect sensors.
+ *
+ *	@author		KC Egger, Rahul Goyal, Alexandros Petrakis
+ *
+ *  @date 2019-12-09 */
+//*****************************************************************************
 
 #ifndef IO_Config_h
 #define IO_Config_h

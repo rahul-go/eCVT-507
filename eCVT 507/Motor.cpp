@@ -1,8 +1,15 @@
-/*
- *	Motor.cpp - Library for motors (adapted from DualVNH5019MotorShield library).
- *	Created by Rahul Goyal, July 1 2019.
- *	Released to Cal Poly Baja SAE. ;)
- */
+//*****************************************************************************
+/**	@file		Motor.cpp
+ *	@brief		Source code for a class that implements a motor.
+ *	@details	This class allows the user to implement a motor. The motor will
+ *				respond to a duty cycle between -100 and 100, with a duty cycle
+ *				of 0 causing the motor to coast regardless of direction. Each
+ *				motor object of this class can controlled independently.
+ *
+ *	@author		KC Egger, Rahul Goyal, Alexandros Petrakis
+ *
+ *  @date 2019-12-09 */
+//*****************************************************************************
 
 #include "Motor.h"
 #include "avr/io.h"
@@ -37,7 +44,7 @@ void Motor::setDutyCycle(int8_t dutyCycle) {
 	}
 
 	// Write PWM, scale 100 to 255
-	analogWrite(PWM, dutyCycle * 255 / 100);
+	analogWrite(PWM, dutyCycle);
 
 	// Coast (indpendent of direction)
 	if (dutyCycle == 0) {

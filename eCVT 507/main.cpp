@@ -61,7 +61,7 @@ const uint16_t CONTROLLER_SPEED = 10000;	// Microseconds (us)
 // Inter-Communication Variables
 bool run;
 bool eCalc, pCalc, sCalc;
-uint16_t pTicks, sTicks;
+int64_t pTicks, sTicks;
 
 // Initialize Task States
 uint8_t eState = 0;
@@ -92,12 +92,12 @@ uint16_t sRatioToTicks(float ratio) {
 
 ISR(PORTE_INT0_vect) { engineSpeed.calc(); }
 ISR(PORTE_INT1_vect) { rWheelsSpeed.calc(); }
-	
+
 ISR(TCE0_CCA_vect) {
 	eCalc = true;
 	pCalc = true;
 	sCalc = true;
-	TCC0.CCA += CONTROLLER_SPEED;
+	TCC0_CCA += CONTROLLER_SPEED;
 }
 
 
@@ -315,18 +315,31 @@ int main(void) {
 	// Serial.begin(9600);
 	// #endif
 	
+	// TEMPORARY //
+	eCalc = true;
+	pCalc = true;
+	sCalc = true;
+	
 	/* ** INPUT/OUTPUT CONFIGURATIONS ** */
 	IO_Init();
-	 // ** TIMER/COUNTER CONFIGURATIONS ** 
+	// ** TIMER/COUNTER CONFIGURATIONS **
 	TC_Init();
-
-	pMot.init();
-	pMot.setDutyCycle(30);
-
+	
+			
+		pMot.init();
+		pMot.setDutyCycle(100);
+		sMot.init();
+		sMot.setDutyCycle(100);
+	
 	while (true) {
-		//eCVT();
-		//primary();
-		//secondary();
-	}
+	//	eCVT();
+// 		primary();
+// 		secondary();
+		uint16_t testp = TCD0.CNT;
+		uint16_t testp2 = pEnc.read();
+		uint16_t tests = TCD1.CNT;
+		uint16_t tests2 = sEnc.read();
+		int blah = 0;
 
+	}
 }

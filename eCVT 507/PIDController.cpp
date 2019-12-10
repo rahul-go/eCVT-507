@@ -1,8 +1,19 @@
-/*
- *	PIDController.cpp - Library for PID controller.
- *	Created by Rahul Goyal, July 1 2019.
- *	Released to Cal Poly Baja SAE. ;)
- */
+//*****************************************************************************
+/**	@file		PIDController.cpp
+ *	@brief		Source code for a class that implements a PID Controller.
+ *	@details	This class allows the user to implement a PID Controller. It is
+ *				given a setpoint, low saturation, high saturation, and Kp, Ki,
+ *				and Kd gain values. In addition to providing PID output, the
+ *				class accounts for integral windup by disabling the integral
+ *				term if the output is determined as saturated. The class can
+ *				also serve as a P-Only, PI, or PD controller by setting the
+ *				appropriate gains to 0, although this does result in some
+ *				unnecessary calculations.
+ *
+ *	@author		KC Egger, Rahul Goyal, Alexandros Petrakis
+ *
+ *  @date 2019-12-09 */
+//*****************************************************************************
 
 #include "PIDController.h"
 #include <stdint.h>

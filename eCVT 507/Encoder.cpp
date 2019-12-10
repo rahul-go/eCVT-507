@@ -1,8 +1,17 @@
-/*
- *	Encoder.cpp - Library for encoder.
- *	Created by Rahul Goyal, July 1 2019.
- *	Released to Cal Poly Baja SAE. ;)
- */
+//*****************************************************************************
+/**	@file		Encoder.cpp
+ *	@brief		Source code for a class that implements an encoder.
+ *	@details	This class allows the user to implement an encoder on either
+ *				Timer D0, Event Channel 2 or Timer D1, Event Channel 3. Future
+ *				updates will allow for the timer and event channel to be chosen
+ *				independently by the user via parameters in the constructor.
+ *				Each encoder object of this class can read from and written to
+ *				independently.
+ *
+ *	@author		KC Egger, Rahul Goyal, Alexandros Petrakis
+ *
+ *  @date 2019-12-09 */
+//*****************************************************************************
 
 #include "Encoder.h"
 #include <stdint.h>
@@ -10,7 +19,16 @@
 #include "TC_Config.h"
 #include "Pin.h"
 
-// Constructor
+/** @brief		Constructor which creates and initializes an encoder object.
+ *  @details	This constructor creates an encoder object with the given pins.
+ *				It saves the pins and sets the pins for input. It sets QDPH0
+ *				and QDPH1 sening level. It sets up the event system depending
+ *				on the encoder. Future updates will allow for the the timer
+ *				and event channel to be chosen independently by the user via
+ *				parameters in the constructor.
+ *  @param		The first signal pin of the encoder.
+ *	@param		The second signal pin of the encoder.
+ */
 Encoder::Encoder(Pin ENC_A, Pin ENC_B) {
 
 	this->ENC_A = ENC_A;
@@ -22,8 +40,7 @@ Encoder::Encoder(Pin ENC_A, Pin ENC_B) {
 	/* Set QDPH0 and QDPH1 sensing level. */
 	PORTCFG.MPCMASK |= (ENC_A.PIN_BM);
 	PORTCFG.MPCMASK |= (ENC_B.PIN_BM);
-	ENC_A.PORT->PIN0CTRL = (ENC_A.PORT->PIN0CTRL & ~PORT_ISC_gm) | PORT_ISC_LEVEL_gc
-	                  | (false ? PORT_INVEN_bm : 0);
+	ENC_A.PORT->PIN0CTRL = (ENC_A.PORT->PIN0CTRL & ~PORT_ISC_gm) | PORT_ISC_LEVEL_gc;
 
 	// Event System Setup
     uint8_t pin = 0;
@@ -48,6 +65,11 @@ Encoder::Encoder(Pin ENC_A, Pin ENC_B) {
 
 }
 
+/** @brief		Return the encoder position.
+ *  @details	This function retrieves the timer count and returns it as an
+ *				unsigned 16-bit number representing the encoder position.
+ *  @return		The encoder position in ticks as an unsigned 16-bit number.
+ */
 uint16_t Encoder::read() {
 	// Primary Encoder
 	if (ENC_A.PIN_BM == P_ENC_A.PIN_BM) {
@@ -59,6 +81,17 @@ uint16_t Encoder::read() {
 	}
 }
 
+/** @brief		Zero the encoder position.
+ *  @details	This function sets the timer count representing the encoder
+ *				position to zero.
+ */
 void Encoder::zero() {
-
+	// Primary Encoder
+	if (ENC_A.PIN_BM == P_ENC_A.PIN_BM) {
+		TCD0.CNT = 0;
+	}
+	// Secondary Encoder
+	if (ENC_A.PIN_BM == S_ENC_A.PIN_BM) {
+		TCD1.CNT = 0;
+	}
 }
