@@ -17,18 +17,34 @@
 #include "TC_Config.h"
 #include "Pin.h"
 
-// Constructor
+/** @brief		Constructor which creates and initializes a motor object.
+ *  @details	This constructor creates a motor object with the given pins.
+ *  @param		INA The first direction pin of the motor driver.
+ *	@param		INB The second direction pin of the motor driver.
+ *	@param		PWM The duty cycle pin of the motor driver.
+ */
 Motor::Motor(Pin INA, Pin INB, Pin PWM) {
 	this->INA = INA;
 	this->INB = INB;
 	this->PWM = PWM;
 }
 
+/** @brief		Configures the pins.
+ *  @details	This function configures the direction pins (that is, INA and
+ *				INB) and duty cycle pin (that is, PWM) as output pins.
+ */
 void Motor::init() {
 	INA.PORT->DIRSET = INA.PIN_BM | INB.PIN_BM;
 	PWM.PORT->DIRSET = PWM.PIN_BM;
 }
 
+/** @brief		Sets the duty cycle.
+ *  @details	This function takes a duty cycle between -100 and 100 to write
+ *				as a PWM signal to the motor driver. It automatically writes to
+ *				the direction pins depending on the sign of the duty cycle and
+ *				scales the absolute value of the provided duty cycle to the PWM
+ *				pin.
+ */
 void Motor::setDutyCycle(int8_t dutyCycle) {
 	// Normalize duty cycle, determine direction
 	if (dutyCycle < 0) {
