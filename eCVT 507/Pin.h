@@ -14,6 +14,10 @@
 
 #include <avr/io.h>
 
+/**	@brief		Header for a struct that implements a pin.
+ *	@details	This struct allows the user to implement a pin containing
+ *				information about the pin's port and number.
+ */
 struct Pin {
 	PORT_t *PORT;
 	uint8_t PIN_BM;
