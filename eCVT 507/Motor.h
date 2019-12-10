@@ -19,7 +19,7 @@
 #include "Pin.h"
 
 
-/**	@brief		Header for a class that implements a motor.
+/**	@brief		Class that implements a motor.
  *	@details	This class allows the user to implement a motor. The motor will
  *				respond to a duty cycle between -100 and 100, with a duty cycle
  *				of 0 causing the motor to coast regardless of direction. Each

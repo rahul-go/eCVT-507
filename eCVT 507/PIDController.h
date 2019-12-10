@@ -20,6 +20,16 @@
 
 #include <stdint.h>
 
+/**	@brief		Class that implements a PID Controller.
+ *	@details	This class allows the user to implement a PID Controller. It is
+ *				given a setpoint, low saturation, high saturation, and Kp, Ki,
+ *				and Kd gain values. In addition to providing PID output, the
+ *				class accounts for integral windup by disabling the integral
+ *				term if the output is determined as saturated. The class can
+ *				also serve as a P-Only, PI, or PD controller by setting the
+ *				appropriate gains to 0, although this does result in some
+ *				unnecessary calculations.
+ */
 class PIDController {
 
 	public:
