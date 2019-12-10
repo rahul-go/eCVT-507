@@ -19,6 +19,14 @@
 #include <stdint.h>
 #include "Pin.h"
 
+/**	@brief		Header for a class that implements an encoder.
+ *	@details	This class allows the user to implement an encoder on either
+ *				Timer D0, Event Channel 2 or Timer D1, Event Channel 3. Future
+ *				updates will allow for the timer and event channel to be chosen
+ *				independently by the user via parameters in the constructor.
+ *				Each encoder object of this class can read from and written to
+ *				independently.
+ */
 class Encoder {
 
 	public:
