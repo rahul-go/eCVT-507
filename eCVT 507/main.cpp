@@ -325,21 +325,9 @@ int main(void) {
 	// ** TIMER/COUNTER CONFIGURATIONS **
 	TC_Init();
 	
-			
-		pMot.init();
-		pMot.setDutyCycle(100);
-		sMot.init();
-		sMot.setDutyCycle(100);
-	
 	while (true) {
-	//	eCVT();
-// 		primary();
-// 		secondary();
-		uint16_t testp = TCD0.CNT;
-		uint16_t testp2 = pEnc.read();
-		uint16_t tests = TCD1.CNT;
-		uint16_t tests2 = sEnc.read();
-		int blah = 0;
-
+		eCVT();
+		primary();
+		secondary();
 	}
 }
