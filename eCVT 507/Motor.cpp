@@ -44,6 +44,7 @@ void Motor::init() {
  *				the direction pins depending on the sign of the duty cycle and
  *				scales the absolute value of the provided duty cycle to the PWM
  *				pin.
+ *  @param		dutyCycle the duty cycle the motor is set to 
  */
 void Motor::setDutyCycle(int8_t dutyCycle) {
 	// Normalize duty cycle, determine direction
