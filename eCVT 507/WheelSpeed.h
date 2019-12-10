@@ -19,6 +19,14 @@
 #include <stdint.h>
 #include "TC_Config.h"
 
+/**	@brief		Header for a class that implements a hall effect sensor to
+ *				measure wheel speed.
+ *	@details	This class allows the user to implement a hall effect sensor to
+ *				meausre wheel speed. It relies on the user to set up an
+ *				interrupt service routine to call the calculate function on the
+ *				rising or falling edge of the signal from a hall effect sensor
+ *				measuring wheel speed.
+ */
 class WheelSpeed {
 
 	public:
