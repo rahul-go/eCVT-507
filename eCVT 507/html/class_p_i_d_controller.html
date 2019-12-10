@@ -68,40 +68,311 @@ $(function() {
 <div class="title">PIDController Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Class that implements a PID Controller.  
+ <a href="class_p_i_d_controller.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="_p_i_d_controller_8h_source.html">PIDController.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a4385346211da5ffcd4872f9a77a40b6b"><td class="memItemLeft" align="right" valign="top"><a id="a4385346211da5ffcd4872f9a77a40b6b"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>PIDController</b> (float Kp, float Ki, float Kd)</td></tr>
+<tr class="memitem:a4385346211da5ffcd4872f9a77a40b6b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_p_i_d_controller.html#a4385346211da5ffcd4872f9a77a40b6b">PIDController</a> (float Kp, float Ki, float Kd)</td></tr>
+<tr class="memdesc:a4385346211da5ffcd4872f9a77a40b6b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor which creates and initializes a motor object.  <a href="#a4385346211da5ffcd4872f9a77a40b6b">More...</a><br /></td></tr>
 <tr class="separator:a4385346211da5ffcd4872f9a77a40b6b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa3f88f9bfd07c96e1af116056ea2f368"><td class="memItemLeft" align="right" valign="top"><a id="aa3f88f9bfd07c96e1af116056ea2f368"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setKp</b> (float Kp)</td></tr>
+<tr class="memitem:aa3f88f9bfd07c96e1af116056ea2f368"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_p_i_d_controller.html#aa3f88f9bfd07c96e1af116056ea2f368">setKp</a> (float Kp)</td></tr>
+<tr class="memdesc:aa3f88f9bfd07c96e1af116056ea2f368"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the proportional gain.  <a href="#aa3f88f9bfd07c96e1af116056ea2f368">More...</a><br /></td></tr>
 <tr class="separator:aa3f88f9bfd07c96e1af116056ea2f368"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8d9a587dbc3d2432e6927551402d81d7"><td class="memItemLeft" align="right" valign="top"><a id="a8d9a587dbc3d2432e6927551402d81d7"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setKi</b> (float Ki)</td></tr>
+<tr class="memitem:a8d9a587dbc3d2432e6927551402d81d7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_p_i_d_controller.html#a8d9a587dbc3d2432e6927551402d81d7">setKi</a> (float Ki)</td></tr>
+<tr class="memdesc:a8d9a587dbc3d2432e6927551402d81d7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the integral gain.  <a href="#a8d9a587dbc3d2432e6927551402d81d7">More...</a><br /></td></tr>
 <tr class="separator:a8d9a587dbc3d2432e6927551402d81d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa6fd9ebf0835ad90a20f38df6615e1f3"><td class="memItemLeft" align="right" valign="top"><a id="aa6fd9ebf0835ad90a20f38df6615e1f3"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setKd</b> (float Kd)</td></tr>
+<tr class="memitem:aa6fd9ebf0835ad90a20f38df6615e1f3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_p_i_d_controller.html#aa6fd9ebf0835ad90a20f38df6615e1f3">setKd</a> (float Kd)</td></tr>
+<tr class="memdesc:aa6fd9ebf0835ad90a20f38df6615e1f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the derivative gain.  <a href="#aa6fd9ebf0835ad90a20f38df6615e1f3">More...</a><br /></td></tr>
 <tr class="separator:aa6fd9ebf0835ad90a20f38df6615e1f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1afeb11fdafe29e44a61c49502990dd0"><td class="memItemLeft" align="right" valign="top"><a id="a1afeb11fdafe29e44a61c49502990dd0"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setSetpoint</b> (int32_t setpoint)</td></tr>
+<tr class="memitem:a1afeb11fdafe29e44a61c49502990dd0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_p_i_d_controller.html#a1afeb11fdafe29e44a61c49502990dd0">setSetpoint</a> (int32_t setpoint)</td></tr>
+<tr class="memdesc:a1afeb11fdafe29e44a61c49502990dd0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the setpoint.  <a href="#a1afeb11fdafe29e44a61c49502990dd0">More...</a><br /></td></tr>
 <tr class="separator:a1afeb11fdafe29e44a61c49502990dd0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab1ef75c91c9d2c7e52c328194063d870"><td class="memItemLeft" align="right" valign="top"><a id="ab1ef75c91c9d2c7e52c328194063d870"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setLoSat</b> (int8_t loSat)</td></tr>
+<tr class="memitem:ab1ef75c91c9d2c7e52c328194063d870"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_p_i_d_controller.html#ab1ef75c91c9d2c7e52c328194063d870">setLoSat</a> (int8_t loSat)</td></tr>
+<tr class="memdesc:ab1ef75c91c9d2c7e52c328194063d870"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the low saturation limit.  <a href="#ab1ef75c91c9d2c7e52c328194063d870">More...</a><br /></td></tr>
 <tr class="separator:ab1ef75c91c9d2c7e52c328194063d870"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad71f9567e88aabf607375c0f5c513a92"><td class="memItemLeft" align="right" valign="top"><a id="ad71f9567e88aabf607375c0f5c513a92"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setHiSat</b> (int8_t hiSat)</td></tr>
+<tr class="memitem:ad71f9567e88aabf607375c0f5c513a92"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_p_i_d_controller.html#ad71f9567e88aabf607375c0f5c513a92">setHiSat</a> (int8_t hiSat)</td></tr>
+<tr class="memdesc:ad71f9567e88aabf607375c0f5c513a92"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the high saturation limit.  <a href="#ad71f9567e88aabf607375c0f5c513a92">More...</a><br /></td></tr>
 <tr class="separator:ad71f9567e88aabf607375c0f5c513a92"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adfe56699c7f330bdacbd1240ca7e1a38"><td class="memItemLeft" align="right" valign="top"><a id="adfe56699c7f330bdacbd1240ca7e1a38"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>calc</b> (int32_t measurement)</td></tr>
+<tr class="memitem:adfe56699c7f330bdacbd1240ca7e1a38"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_p_i_d_controller.html#adfe56699c7f330bdacbd1240ca7e1a38">calc</a> (int32_t measurement)</td></tr>
+<tr class="memdesc:adfe56699c7f330bdacbd1240ca7e1a38"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update the previous error, the error, the integral, and the derivative.  <a href="#adfe56699c7f330bdacbd1240ca7e1a38">More...</a><br /></td></tr>
 <tr class="separator:adfe56699c7f330bdacbd1240ca7e1a38"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9691a50160d89b3aac20fad29293a797"><td class="memItemLeft" align="right" valign="top"><a id="a9691a50160d89b3aac20fad29293a797"></a>
-float&#160;</td><td class="memItemRight" valign="bottom"><b>get</b> ()</td></tr>
+<tr class="memitem:a9691a50160d89b3aac20fad29293a797"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_p_i_d_controller.html#a9691a50160d89b3aac20fad29293a797">get</a> ()</td></tr>
+<tr class="memdesc:a9691a50160d89b3aac20fad29293a797"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update the saturation status and return the PID output.  <a href="#a9691a50160d89b3aac20fad29293a797">More...</a><br /></td></tr>
 <tr class="separator:a9691a50160d89b3aac20fad29293a797"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab6adfbffa30414f0a83b95ba999a2fea"><td class="memItemLeft" align="right" valign="top"><a id="ab6adfbffa30414f0a83b95ba999a2fea"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>reset</b> ()</td></tr>
+<tr class="memitem:ab6adfbffa30414f0a83b95ba999a2fea"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_p_i_d_controller.html#ab6adfbffa30414f0a83b95ba999a2fea">reset</a> ()</td></tr>
+<tr class="memdesc:ab6adfbffa30414f0a83b95ba999a2fea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reset the calculated integral and derivative to zero.  <a href="#ab6adfbffa30414f0a83b95ba999a2fea">More...</a><br /></td></tr>
 <tr class="separator:ab6adfbffa30414f0a83b95ba999a2fea"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Class that implements a PID Controller. </p>
+<p>This class allows the user to implement a PID Controller. It is given a setpoint, low saturation, high saturation, and Kp, Ki, and Kd gain values. In addition to providing PID output, the class accounts for integral windup by disabling the integral term if the output is determined as saturated. The class can also serve as a P-Only, PI, or PD controller by setting the appropriate gains to 0, although this does result in some unnecessary calculations. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a4385346211da5ffcd4872f9a77a40b6b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4385346211da5ffcd4872f9a77a40b6b">&#9670;&nbsp;</a></span>PIDController()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">PIDController::PIDController </td>
+          <td>(</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>Kp</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>Ki</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>Kd</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Constructor which creates and initializes a motor object. </p>
+<p>This constructor creates a PID controller object with a given proportional gain, integral gain, and derivative gain. If a P-Only, PI, or PD controller is desired, set the other gains to zero. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Kp</td><td>The proportional gain for the controller. </td></tr>
+    <tr><td class="paramname">Ki</td><td>The integral gain for the controller. </td></tr>
+    <tr><td class="paramname">Kd</td><td>The derivative gain for the controller. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="adfe56699c7f330bdacbd1240ca7e1a38"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adfe56699c7f330bdacbd1240ca7e1a38">&#9670;&nbsp;</a></span>calc()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void PIDController::calc </td>
+          <td>(</td>
+          <td class="paramtype">int32_t&#160;</td>
+          <td class="paramname"><em>measurement</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Update the previous error, the error, the integral, and the derivative. </p>
+<p>This function updates the previous error, the error, the integral, and the derivative values. These values can be used to calculate the PID output and saturation status, but this calculation is left until the <a class="el" href="class_p_i_d_controller.html#a9691a50160d89b3aac20fad29293a797" title="Update the saturation status and return the PID output. ">get()</a> function is called to minimize the time spent in the interrupt service routine. </p>
+
+</div>
+</div>
+<a id="a9691a50160d89b3aac20fad29293a797"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9691a50160d89b3aac20fad29293a797">&#9670;&nbsp;</a></span>get()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float PIDController::get </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Update the saturation status and return the PID output. </p>
+<p>This function calculatest the PID output. It then compares the calculated output to the low saturation limit and the high saturation limit. If the PID output is outside of the saturation limits, the saturation status is set to true, else it is set to false. The PID output is then returned. </p><dl class="section return"><dt>Returns</dt><dd>get The PID output as a float. </dd></dl>
+
+</div>
+</div>
+<a id="ab6adfbffa30414f0a83b95ba999a2fea"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab6adfbffa30414f0a83b95ba999a2fea">&#9670;&nbsp;</a></span>reset()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void PIDController::reset </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Reset the calculated integral and derivative to zero. </p>
+<p>This function resets the calculated integral and derivative to zero so that the PID controller can be re-entered without an affect from old data. </p>
+
+</div>
+</div>
+<a id="ad71f9567e88aabf607375c0f5c513a92"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad71f9567e88aabf607375c0f5c513a92">&#9670;&nbsp;</a></span>setHiSat()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void PIDController::setHiSat </td>
+          <td>(</td>
+          <td class="paramtype">int8_t&#160;</td>
+          <td class="paramname"><em>hiSat</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Updates the high saturation limit. </p>
+<p>This function updates the high saturation limit to a new value during use. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">hiSat</td><td>The new high saturation limit for the controller. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="aa6fd9ebf0835ad90a20f38df6615e1f3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa6fd9ebf0835ad90a20f38df6615e1f3">&#9670;&nbsp;</a></span>setKd()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void PIDController::setKd </td>
+          <td>(</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>Kd</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Updates the derivative gain. </p>
+<p>This function updates the derivative gain to a new value during use. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Kd</td><td>The new derivative gain for the controller. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a8d9a587dbc3d2432e6927551402d81d7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8d9a587dbc3d2432e6927551402d81d7">&#9670;&nbsp;</a></span>setKi()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void PIDController::setKi </td>
+          <td>(</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>Ki</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Updates the integral gain. </p>
+<p>This function updates the integral gain to a new value during use. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Ki</td><td>The new integral gain for the controller. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="aa3f88f9bfd07c96e1af116056ea2f368"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa3f88f9bfd07c96e1af116056ea2f368">&#9670;&nbsp;</a></span>setKp()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void PIDController::setKp </td>
+          <td>(</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>Kp</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Updates the proportional gain. </p>
+<p>This function updates the proportional gain to a new value during use. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Kp</td><td>The new proportional gain for the controller. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ab1ef75c91c9d2c7e52c328194063d870"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab1ef75c91c9d2c7e52c328194063d870">&#9670;&nbsp;</a></span>setLoSat()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void PIDController::setLoSat </td>
+          <td>(</td>
+          <td class="paramtype">int8_t&#160;</td>
+          <td class="paramname"><em>loSat</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Updates the low saturation limit. </p>
+<p>This function updates the low saturation limit to a new value during use. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">loSat</td><td>The new low saturation limit for the controller. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a1afeb11fdafe29e44a61c49502990dd0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1afeb11fdafe29e44a61c49502990dd0">&#9670;&nbsp;</a></span>setSetpoint()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void PIDController::setSetpoint </td>
+          <td>(</td>
+          <td class="paramtype">int32_t&#160;</td>
+          <td class="paramname"><em>setpoint</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Updates the setpoint. </p>
+<p>This function updates the setpoint to a new value during use. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">setpoint</td><td>The new proportional gain for the controller. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li><a class="el" href="_p_i_d_controller_8h_source.html">PIDController.h</a></li>
 <li><a class="el" href="_p_i_d_controller_8cpp.html">PIDController.cpp</a></li>

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['read',['read',['../class_encoder.html#a1d80d4b27aadd5198902d29b08b54b4c',1,'Encoder']]]
+  ['pidcontroller',['PIDController',['../class_p_i_d_controller.html#a4385346211da5ffcd4872f9a77a40b6b',1,'PIDController']]]
 ];

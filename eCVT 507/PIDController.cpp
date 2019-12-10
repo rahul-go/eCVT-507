@@ -71,9 +71,9 @@ void PIDController::setLoSat(int8_t loSat) { this->loSat = loSat; }
  */
 void PIDController::setHiSat(int8_t hiSat) { this->hiSat = hiSat; }
 
-/** @brief		Update the previous error, error, integral, and derivative.
- *  @details	This function updates the previous error, error, integral, and
- *				derivative values. These values can be used to calculate the
+/** @brief		Update the previous error, the error, the integral, and the derivative.
+ *  @details	This function updates the previous error, the error, the integral, and
+ *				the derivative values. These values can be used to calculate the
  *				PID output and saturation status, but this calculation is left
  *				until the get() function is called to minimize the time spent
  *				in the interrupt service routine.
