@@ -68,19 +68,119 @@ $(function() {
 <div class="title">Motor Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Header for a class that implements a motor.  
+ <a href="class_motor.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="_motor_8h_source.html">Motor.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ad037c65c0ec24556b7c7c367f42e3686"><td class="memItemLeft" align="right" valign="top"><a id="ad037c65c0ec24556b7c7c367f42e3686"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>Motor</b> (<a class="el" href="struct_pin.html">Pin</a> INA, <a class="el" href="struct_pin.html">Pin</a> INB, <a class="el" href="struct_pin.html">Pin</a> PWM)</td></tr>
+<tr class="memitem:ad037c65c0ec24556b7c7c367f42e3686"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_motor.html#ad037c65c0ec24556b7c7c367f42e3686">Motor</a> (<a class="el" href="struct_pin.html">Pin</a> INA, <a class="el" href="struct_pin.html">Pin</a> INB, <a class="el" href="struct_pin.html">Pin</a> PWM)</td></tr>
+<tr class="memdesc:ad037c65c0ec24556b7c7c367f42e3686"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor which creates and initializes a motor object.  <a href="#ad037c65c0ec24556b7c7c367f42e3686">More...</a><br /></td></tr>
 <tr class="separator:ad037c65c0ec24556b7c7c367f42e3686"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac33814c8814d6b576531149ee945516d"><td class="memItemLeft" align="right" valign="top"><a id="ac33814c8814d6b576531149ee945516d"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>init</b> ()</td></tr>
+<tr class="memitem:ac33814c8814d6b576531149ee945516d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_motor.html#ac33814c8814d6b576531149ee945516d">init</a> ()</td></tr>
+<tr class="memdesc:ac33814c8814d6b576531149ee945516d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Configures the pins.  <a href="#ac33814c8814d6b576531149ee945516d">More...</a><br /></td></tr>
 <tr class="separator:ac33814c8814d6b576531149ee945516d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aedb11319566abc8f5297454a0d6833c4"><td class="memItemLeft" align="right" valign="top"><a id="aedb11319566abc8f5297454a0d6833c4"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setDutyCycle</b> (int8_t dutyCycle)</td></tr>
+<tr class="memitem:aedb11319566abc8f5297454a0d6833c4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_motor.html#aedb11319566abc8f5297454a0d6833c4">setDutyCycle</a> (int8_t dutyCycle)</td></tr>
+<tr class="memdesc:aedb11319566abc8f5297454a0d6833c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the duty cycle.  <a href="#aedb11319566abc8f5297454a0d6833c4">More...</a><br /></td></tr>
 <tr class="separator:aedb11319566abc8f5297454a0d6833c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Header for a class that implements a motor. </p>
+<p>This class allows the user to implement a motor. The motor will respond to a duty cycle between -100 and 100, with a duty cycle of 0 causing the motor to coast regardless of direction. Each motor object of this class can controlled independently. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="ad037c65c0ec24556b7c7c367f42e3686"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad037c65c0ec24556b7c7c367f42e3686">&#9670;&nbsp;</a></span>Motor()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Motor::Motor </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_pin.html">Pin</a>&#160;</td>
+          <td class="paramname"><em>INA</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_pin.html">Pin</a>&#160;</td>
+          <td class="paramname"><em>INB</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_pin.html">Pin</a>&#160;</td>
+          <td class="paramname"><em>PWM</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Constructor which creates and initializes a motor object. </p>
+<p>This constructor creates a motor object with the given pins. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">INA</td><td>The first direction pin of the motor driver. </td></tr>
+    <tr><td class="paramname">INB</td><td>The second direction pin of the motor driver. </td></tr>
+    <tr><td class="paramname">PWM</td><td>The duty cycle pin of the motor driver. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="ac33814c8814d6b576531149ee945516d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac33814c8814d6b576531149ee945516d">&#9670;&nbsp;</a></span>init()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Motor::init </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Configures the pins. </p>
+<p>This function configures the direction pins (that is, INA and INB) and duty cycle pin (that is, PWM) as output pins. </p>
+
+</div>
+</div>
+<a id="aedb11319566abc8f5297454a0d6833c4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aedb11319566abc8f5297454a0d6833c4">&#9670;&nbsp;</a></span>setDutyCycle()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Motor::setDutyCycle </td>
+          <td>(</td>
+          <td class="paramtype">int8_t&#160;</td>
+          <td class="paramname"><em>dutyCycle</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Sets the duty cycle. </p>
+<p>This function takes a duty cycle between -100 and 100 to write as a PWM signal to the motor driver. It automatically writes to the direction pins depending on the sign of the duty cycle and scales the absolute value of the provided duty cycle to the PWM pin. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">dutyCycle</td><td>the duty cycle the motor is set to </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li><a class="el" href="_motor_8h_source.html">Motor.h</a></li>
 <li><a class="el" href="_motor_8cpp.html">Motor.cpp</a></li>
